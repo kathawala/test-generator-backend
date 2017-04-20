@@ -1,0 +1,29 @@
+{
+  "browser_type": "Firefox",
+  "input": [
+    {
+      "action": "navigate to url",
+      "url": "https://www.poetryfoundation.org/"
+    },
+    {
+      "selector": "div.feature-byline",
+      "action": "click"
+    },
+    {
+      "selector": "div.feature-byline>span.hdg",
+      "action": "click"
+    },    
+    {
+      "selector": "div.nonexistent-class",
+      "action": "exists"
+    },
+    {
+      "selector": "div.nonexistent-class",
+      "action": "does not exist"
+    },
+    {
+      "selector": "div.feature-byline",
+      "action": "exists"
+    }
+  ]
+}
