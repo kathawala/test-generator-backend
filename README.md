@@ -1,23 +1,59 @@
 # test-generator-backend
 Backend work for an automatic Selenium Webdriver test generator
 
-
 ## How to Use
 
-Make sure your `python` command is running Python 3. Then just
+### Step 1: Clone the repo and make a virtualenv for this project.
 
-```bash
-python generateScript.py
-```
-
-You should find a file called `seleniumtest.py` after running the above command.
-You will need Selenium Webdriver and its python bindings installed to run this test, but it should work!
-Currently the test returns the following output (on purpose):
+Run the following commands
 
 ```
-$ python seleniumtest.py
-ERROR: Action('exists') | Couldn't find element(s) specified by CSS selector: div.nonexistent-class
-$
+$ git clone https://github.com/kathawala/test-generator-backend.git
+$ cd test-generator-backend
+$ pip install virtualenvwrapper
+...
+$ export WORKON_HOME=~/Envs
+$ mkdir -p $WORKON_HOME
+$ source /usr/local/bin/virtualenvwrapper.sh
+$ mkvirtualenv generator
+```
+
+Now you have a virtualenv for this project.
+When you enter the `test-generator-backend` directory,
+you should run the following command before starting work:
+
+```
+workon generator
+```
+
+And run this command when you're done:
+
+```
+deactivate
+```
+
+### Step 2: Install requirements
+
+Run the following commands
+
+```
+$ pip install -r requirements.txt
+```
+
+### Step 3: Code! Run tests! Launch the server!
+
+To launch the server do the following:
+
+```
+$ cd webapp
+$ export FLASK_APP=app.py
+$ flask run
+```
+
+To send a test request to the newly launched server, do the following from the root directory of the project:
+
+```
+$ python test.py
 ```
 
 ## Features

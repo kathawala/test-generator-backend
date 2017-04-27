@@ -1,0 +1,2 @@
+import requests
+res = requests.post('http://127.0.0.1:5000/', json={"browser_type": "Firefox","input": [{"action": "navigate to url","url": "https://www.poetryfoundation.org/"},{"selector": "div.feature-byline","action": "click"},{"selector": "div.feature-byline", "action": "does not exist"},{"selector": "div.feature-byline","action": "exists"}]})
