@@ -62,6 +62,10 @@ def handleNavigateToUrl(url):
 
     return "driver.get('{0}')\n".format(url)
 
+def handleSend(selector, value):
+
+    return "browser.send('{0}', '{1}')\n".format(selector, value)
+
     
 def processEvent(event):
 
@@ -71,6 +75,10 @@ def processEvent(event):
         
         return handleClick(event['selector'])
 
+    elif action == "send":
+
+        return handleSend(event['selector'], event['value'])
+    
     elif action == "exists":
 
         return handleExists(event['selector'])

@@ -56,8 +56,69 @@ To send a test request to the newly launched server, do the following from the r
 $ python test.py
 ```
 
-## Features
+## API
 
-Looking at `example.json` should tell you how many actions we support currently.
+The backend accepts JSON submitted in a POST request to the /generate URL.
 
-Right now the generator supports `click`, `exists`, `does not exist`, and `navigate to url` actions.
+In other words, if the application's URL is `www.example.com` then the JSON
+should be posted to `www.example.com/generate`.
+
+### Setup
+
+A valid JSON request will be styled as follows
+
+```Javascript
+{
+  "browser_type": "Firefox",
+  "input": [
+  	   // actions go in this array
+  ]
+}
+```
+
+Sending the `browser_type` variable is necessary. Then, for every action
+which needs to be generated, make the appropriate object for that action
+and insert it into the array. The order of the actions in the array is the order
+of execution of the generated program.
+
+### Actions
+
+#### `click`
+
+```Javascript
+{
+    "selector": "div.feature-byline",
+    "action": "click"
+}
+ 
+```
+
+#### `exists`
+
+```Javascript
+{
+    "selector": "div.feature-byline",
+    "action": "exists"
+}
+```
+
+#### `does not exist`
+
+```Javascript
+{
+    "selector": "div.nonexistent-class",
+    "action": "does not exist"
+}
+```
+
+#### `navigate to url`
+
+```Javascript
+{
+    "action": "navigate to url",
+    "url": "https://www.poetryfoundation.org/"
+}
+```
+### Full Example
+
+Looking at `example.json` should give you a full working example.
