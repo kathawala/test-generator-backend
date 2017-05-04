@@ -102,13 +102,15 @@ cs194proj.controller('MainController', ['$scope', '$http', function($scope, $htt
 	}
 
 	var JSONObj = {
-	  "browser_type": "firefox",
+	  "browser_type": "Firefox",
 	  "actions": actions
 	}
 
 	$http.post('/generate',JSON.stringify(JSONObj)).then(
 	  function(data, status, headers, config){
 	    $scope.generatedScript = data.data;
+	    var blob = new Blob([ $scope.generatedScript ], { type : 'text/plain' });
+	    $scope.url = (window.URL || window.webkitURL).createObjectURL( blob );
 	  }, function(data, status, headers, config){
 	    console.log(data);
 	  });
@@ -116,6 +118,7 @@ cs194proj.controller('MainController', ['$scope', '$http', function($scope, $htt
 	$scope.showScript = true; 
         $scope.warningMessage = '';
         $scope.generateMessage = 're-generate script';
+
       }
       console.log($scope.selectorList);
     }
@@ -130,8 +133,5 @@ cs194proj.controller('MainController', ['$scope', '$http', function($scope, $htt
       $scope.showSavedRows = !$scope.showSavedRows;
       console.log($scope.savedRowsArray);
     }
-
-    var content = 'lorem ipsum';
-    var blob = new Blob([ content ], { type : 'text/plain' });
-    $scope.url = (window.URL || window.webkitURL).createObjectURL( blob );
+  
 }]);

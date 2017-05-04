@@ -22,5 +22,4 @@ def generate():
         # print(script)
     data = request.get_json()
     script = generateScript(data)
-    print(script)
     return script

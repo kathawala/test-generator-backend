@@ -60,6 +60,9 @@ def handleDoesNotExist(selector):
 
 def handleNavigateToUrl(url):
 
+    if not url.startswith('http'):
+        url = "http://" + url
+    
     return "driver.get('{0}')\n".format(url)
 
 def handleSend(selector, value):
