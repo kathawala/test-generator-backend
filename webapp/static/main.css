@@ -1,0 +1,87 @@
+.titleBar {
+	background-color: #CB817B;
+	height: 100px;
+}
+
+.element {
+	line-height: 100px;
+	font-size: 30px;
+}
+
+.main {
+	background-color: #CBB3B1;
+	height: 100%;
+}
+
+.addedRow {
+	background-color: white;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.input {
+	height: 50px;
+	padding: 10px;
+	background-color: white;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.createPrompt {
+	text-align: center;
+	font-size: 50px;
+	margin: 10px;
+	padding:10px;
+}
+
+.warningMessage {
+	font-size: 30px;
+	color: red;
+}
+
+.action {
+	font-size: 30px;
+	line-height: 50px;
+	height: 50px;
+	color: red;
+}
+
+.secondary {
+	font-size: 20px;
+	line-height: 50px;
+}
+
+.label1 {
+	color: blue;
+	font-weight: bold;
+	display: inline-block;
+}
+
+.customized {
+	color: blue;
+	display: inline-block;
+}
+
+.margins {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.button {
+	background-color: white;
+	height: 50px;
+	line-height: 50px;
+	font-size: 15px;
+	margin: 5px;
+}
+
+.scroll {
+	overflow-y: scroll;
+	height: 300px;
+	background-color: white;
+}
+
+.placeholder {
+	height: 10px;
+	margin: 5px;
+}

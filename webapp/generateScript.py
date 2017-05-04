@@ -98,8 +98,8 @@ def processEvent(event):
 def generateScript(data):
     
     output = initializeScript(data['browser_type'])
-        
-    timeline = data['input']
+
+    timeline = data['actions']
     for event in timeline:
         output = output + processEvent(event)
 

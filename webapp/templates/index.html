@@ -1,0 +1,101 @@
+<!doctype html>
+<html ng-app="cs194proj" ng-controller="MainController">
+    <head>
+        <!-- Add Angular -->
+        <script type="text/javascript" src="static/angular.js"></script>
+        <!--Include the main controller (MainController) and stylesheet -->
+        <script type="text/javascript" src="static/mainController.js"></script>
+        <link rel="stylesheet" type="text/css" href="static/main.css" />
+        <!-- add bootstrap -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    </head>
+
+    <body class = "main">
+
+        <div class = "titleBar row"> 
+            <div class = "col-md-3 element"> Arsenic Webdriver </div>
+            <div class = "col-md-7 element"> </div>
+            <div class = "col-md-2 element"> user info </div> 
+        </div>
+
+        <div class = "createPrompt"> Create a script! </div>
+
+        <div ng-repeat="item in selectorList">
+            <div class = "row">
+                <div class = "col-md-2"></div>
+                <div class = "addedRow col-md-8">
+                    <div class = "col-md-5 action"> {{item.action}} </div>
+                    <div class = "col-md-5 secondary" ng-show = "item.selector != ''"> 
+                        <div class = "label1"> Selector: </div>
+                        <div class = "customized"> {{item.selector}} </div>
+                    </div>
+                    <div class = "col-md-5 secondary" ng-show = "item.url != ''"> 
+                        <div class = "label1"> URL: </div>
+                        <div class = "customized"> {{item.url}} </div>
+                    </div>
+                </div>
+                <div class = "col-md-3"></div> 
+            </div>
+        </div>
+
+        <div class = "row" ng-show="show">
+            <div class = "col-md-2"></div>
+
+            <select name="cars" class = "col-md-2 input" ng-model = "listItem.action" ng-change = "selectedChanged()">
+              <option value="navigate to url">navigate to</option>
+              <option value="exists">check if exists</option>
+              <option value="does not exist">check if doesn't exist</option>
+              <option value="click">click on</option>
+            </select>
+
+            <div ng-show = "listItem.action != 'navigate to url'">
+                <input class = "col-md-4 input margins" type="text" ng-model="listItem.selector" />
+                <button class = "col-md-2 input" ng-click="add(listItem)">Add</button>
+            </div>
+            <div ng-show = "listItem.action == 'navigate to url'">
+                <input class = "col-md-4 input margins" type="text" ng-model="listItem.url" />
+                <button class = "col-md-2 input" ng-click="add(listItem)">Add</button>
+            </div>
+
+            <div class = "col-md-2"></div> 
+        </div>
+
+        <div class = "row">
+            <div class = "col-md-2"></div>
+            <div ng-show = "warningMessage != ''" class = "warningMessage"> {{warningMessage}} </div>
+        </div>
+
+        <div ng-show = "showSavedRows">
+            <div ng-repeat = "item in savedRowsArray">
+                <div class = "row">
+                    <div class = "col-md-2"></div>    
+                    <div class = "col-md-2"> here: {{item.name}} </div>         
+                </div>
+            </div>
+        </div>
+
+        <div class = "row">
+            <div class = "col-md-2"></div>
+            <div class = "col-md-2 button" ng-click="show = !show; warningMessage = ''"> add another row </div>
+            <div class = "col-md-2 button" ng-click="generate()"> {{generateMessage}} </div>
+            <div class = "col-md-2 button" ng-click="clear()"> start over </div>
+            <div class = "col-md-2 button" ng-click="savedRows()"> add saved rows </div>
+        </div>
+
+        <div ng-show = "showScript"> 
+            <div class = "row">
+                <div class = "col-md-2"></div>
+                <div class = "col-md-8 scroll"> <pre>{{generatedScript}}</pre> </div>
+            </div>
+        </div> 
+
+        <div class = "placeholder"></div>
+
+        <div class = "row" ng-show = "showScript">
+            <div class = "col-md-2"></div>
+            <a download="content.py" ng-href="{{url}}" class = "col-md-2 button"> download this script </a>
+        </div>
+
+    </body>
+</html>

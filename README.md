@@ -70,7 +70,7 @@ A valid JSON request will be styled as follows
 ```Javascript
 {
   "browser_type": "Firefox",
-  "input": [
+  "actions": [
   	   // actions go in this array
   ]
 }
@@ -78,7 +78,7 @@ A valid JSON request will be styled as follows
 
 Sending the `browser_type` variable is necessary. Then, for every action
 which needs to be generated, make the appropriate object for that action
-and insert it into the array. The order of the actions in the array is the order
+and insert it into the `actions` array. The order of the actions in the array is the order
 of execution of the generated program.
 
 ### Actions
