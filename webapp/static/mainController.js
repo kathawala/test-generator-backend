@@ -164,6 +164,12 @@ cs194proj.controller('MainController', ['$scope', '$http', function($scope, $htt
       }
     }
 
+    $scope.addAnotherRow = function() {
+      $scope.show = !$scope.show; 
+      $scope.warningMessage = ''; 
+      $scope.showSavedRows = false;
+    }
+
     $scope.remove = function(index) {
       if (index == 0 && $scope.selectorList.length > 1) {
         if ($scope.selectorList[1].action != 'navigate to url') {
@@ -180,5 +186,17 @@ cs194proj.controller('MainController', ['$scope', '$http', function($scope, $htt
       console.log("dismissing");
       $scope.warningMessage = '';
     }
-  
+
+    $scope.randomName = "first.py";
+
+    $scope.changeName = function() {
+      var random = '';
+      var charset = "abcdefghijklmnopqrstuvwxyz0123456789";
+      for(var i=0; i < 10; i++) {
+        random += charset.charAt(Math.floor(Math.random() * charset.length));
+      }
+      random += '.py';
+      $scope.randomName = name;
+    }
+
 }]);

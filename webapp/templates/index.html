@@ -96,8 +96,8 @@
 
         <div class = "row">
             <div class = "col-md-2"></div>
-            <div class = "col-md-2 button" ng-click="show = !show; warningMessage = ''; showSavedRows = false;"> add another row </div>
-            <div class = "col-md-2 button" ng-click="generate()"> {{generateMessage}} </div>
+            <div class = "col-md-2 button" ng-click="addAnotherRow()"> add another row </div>
+            <div class = "col-md-2 button" ng-click="generate(); changeName()"> {{generateMessage}} </div>
             <div class = "col-md-2 button" ng-click="clear()"> start over </div>
             <div class = "col-md-2 button" ng-click="savedRows()"> add saved rows </div>
         </div>
@@ -113,7 +113,7 @@
 
         <div class = "row" ng-show = "showScript">
             <div class = "col-md-2"></div>
-            <a download="test.py" ng-href="{{url}}" class = "col-md-2 button"> download this script </a>
+            <a download="{{randomName}}" ng-href="{{url}}" class = "col-md-2 button"> download this script </a>
         </div>
 
     </body>
