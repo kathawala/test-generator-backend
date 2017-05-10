@@ -38,16 +38,27 @@ cs194proj.controller('MainController', ['$scope', '$http', function($scope, $htt
     },
     {
       name: "subset 2",
+      values: [{ action: 'click',
+        selector: 'this should give an error if chosen first',
+        url: '',
+      }, 
+      { action: 'click',
+        selector: 'example selector 2',
+        url: '',
+      }]
+    },
+    {
+      name: "subset 3",
       values: [{ action: 'navigate to url',
         selector: '',
         url: 'www.amazon.com',
       }, 
       { action: 'exists',
-        selector: 'example selector 2',
+        selector: 'example selector 3',
         url: '',
       },
       { action: 'click',
-        selector: 'example selector 3',
+        selector: 'example selector 4',
         url: '',
       }]
     }];
@@ -59,26 +70,24 @@ cs194proj.controller('MainController', ['$scope', '$http', function($scope, $htt
     $scope.show = false;
 
   	$scope.add = function(listItem) {  
-      if (listItem.action == undefined) listItem.action = '';
-      if (listItem.selector == undefined) listItem.selector = '';
-      if (listItem.url == undefined) listItem.url = '';
+      //set appropriate things to ''
+      if (listItem.action == 'navigate to url') {
+        listItem.selector = '';
+      }
+      if (listItem.action == 'exists' || listItem.action == 'does not exist' || listItem.action == 'click') {
+        listItem.url = '';
+      }
 
       if ($scope.selectorList.length == 0 && listItem.action != 'navigate to url') {
         $scope.warningMessage = 'You must navigate to a website before you can run any tests!';
-
-        listItem.action = '';
-        listItem.selector = '';
-        listItem.url = '';
       }
-      else if (listItem.action == 'navigate to url' && listItem.url == '') {
+      else if (listItem.action == 'navigate to url' && listItem.url == undefined) {
         $scope.warningMessage = 'You must input a value for the URL!';
       }
-      else if (listItem.action != 'navigate to url' && listItem.selector == '') {
+      else if (listItem.action != 'navigate to url' && listItem.selector == undefined) {
         $scope.warningMessage = 'You must input a value for the selector!';
       }
       else {
-        var index = $scope.listItems.indexOf(listItem);
-        $scope.listItems.splice(index, 1);
         $scope.selectorList.push(angular.copy(listItem));
         $scope.warningMessage = '';
 
@@ -90,11 +99,12 @@ cs194proj.controller('MainController', ['$scope', '$http', function($scope, $htt
       }
   	}
 
-    $scope.generate = function() {
-      if ($scope.selectorList.length == 0) {
-        $scope.warningMessage = 'Your script will be empty!';
-      }
-      else {
+  $scope.generate = function() {
+    if ($scope.selectorList.length == 0) {
+      $scope.warningMessage = 'Your script will be empty!';
+    }
+    else {
+
 	var actions = new Array();
 	for (var i = 0; i < $scope.selectorList.length; i++) {
 	  var item = $scope.selectorList[i];
@@ -116,22 +126,42 @@ cs194proj.controller('MainController', ['$scope', '$http', function($scope, $htt
 	  });
 
 	$scope.showScript = true; 
-        $scope.warningMessage = '';
-        $scope.generateMessage = 're-generate script';
-
+      $scope.showSavedRows = false;
+      $scope.warningMessage = '';
+      $scope.generateMessage = 're-generate script';
       }
       console.log($scope.selectorList);
     }
 
     $scope.clear = function() {
+      $scope.showSavedRows = false;
       $scope.showScript = false;
       $scope.selectorList = [];
       $scope.generateMessage = 'generate script';
     }
 
     $scope.savedRows = function() {
+      $scope.show = false;
       $scope.showSavedRows = !$scope.showSavedRows;
-      console.log($scope.savedRowsArray);
+    }
+
+    $scope.addSnippet = function(name) {
+      for (var i in $scope.savedRowsArray) {
+       if ($scope.savedRowsArray[i].name == name) {
+          for (var j in $scope.savedRowsArray[i].values) {
+            console.log($scope.savedRowsArray[i].values[j].action);
+
+            var copy = angular.copy($scope.savedRowsArray[i].values[j]);
+            if ($scope.selectorList.length == 0 && copy.action != 'navigate to url') {
+              $scope.warningMessage = 'You must navigate to a website before you can run any tests!';
+            }
+            else {
+              $scope.selectorList.push(copy);
+              $scope.warningMessage = '';
+            }
+          }
+       }
+      }
     }
   
 }]);

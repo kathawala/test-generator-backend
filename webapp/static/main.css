@@ -85,3 +85,21 @@
 	height: 10px;
 	margin: 5px;
 }
+
+.subsetTitle {
+	background-color: #F0E8E8;
+	height: 50px;
+	line-height: 50px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	font-size: 40px;
+	color: red;
+}
+
+.add {
+	background-color: #F0CCE8;
+	height: 50px;
+	line-height: 50px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}

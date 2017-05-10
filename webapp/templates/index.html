@@ -19,7 +19,7 @@
             <div class = "col-md-2 element"> user info </div> 
         </div>
 
-        <div class = "createPrompt"> Create a script! </div>
+        <div class = "createPrompt"> Create a script!!!! </div>
 
         <div ng-repeat="item in selectorList">
             <div class = "row">
@@ -70,14 +70,31 @@
             <div ng-repeat = "item in savedRowsArray">
                 <div class = "row">
                     <div class = "col-md-2"></div>    
-                    <div class = "col-md-2"> here: {{item.name}} </div>         
+                    <div class = "col-md-6 subsetTitle"> {{item.name}} </div>
+                    <div class = "col-md-2 add" ng-click = "addSnippet(item.name)"> add this snippet </div>   
                 </div>
+                <div ng-repeat = "jsonObject in item.values"> 
+                    <div class = "row">
+                        <div class = "col-md-2"></div>
+                        <div class = "addedRow col-md-8">
+                            <div class = "col-md-5"> {{jsonObject.action}} </div>
+                            <div class = "col-md-5" ng-show = "jsonObject.selector != ''"> 
+                                <div class = "label1"> Selector: </div>
+                                <div class = "customized"> {{jsonObject.selector}} </div>
+                            </div>
+                            <div class = "col-md-5" ng-show = "jsonObject.url != ''"> 
+                                <div class = "label1"> URL: </div>
+                                <div class = "customized"> {{jsonObject.url}} </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>  
             </div>
         </div>
 
         <div class = "row">
             <div class = "col-md-2"></div>
-            <div class = "col-md-2 button" ng-click="show = !show; warningMessage = ''"> add another row </div>
+            <div class = "col-md-2 button" ng-click="show = !show; warningMessage = ''; showSavedRows = false;"> add another row </div>
             <div class = "col-md-2 button" ng-click="generate()"> {{generateMessage}} </div>
             <div class = "col-md-2 button" ng-click="clear()"> start over </div>
             <div class = "col-md-2 button" ng-click="savedRows()"> add saved rows </div>
