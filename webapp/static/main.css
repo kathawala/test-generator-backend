@@ -35,7 +35,7 @@
 }
 
 .warningMessage {
-	font-size: 30px;
+	font-size: 20px;
 	color: red;
 }
 
@@ -102,4 +102,18 @@
 	line-height: 50px;
 	margin-top: 5px;
 	margin-bottom: 5px;
+}
+
+.remove {
+	height: 50px;
+	line-height: 50px;
+	margin-top: 10px;
+	margin-bottom: 5px;
+	font-size: 20px;
+	background-color: #7FC8CF;
+}
+
+.dismiss {
+	font-size: 20px;
+	background-color: #7FC8CF;
 }

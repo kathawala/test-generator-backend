@@ -20,7 +20,7 @@
         </div>
 
         <div class = "createPrompt"> Create a script!!!! </div>
-
+ 
         <div ng-repeat="item in selectorList">
             <div class = "row">
                 <div class = "col-md-2"></div>
@@ -35,7 +35,8 @@
                         <div class = "customized"> {{item.url}} </div>
                     </div>
                 </div>
-                <div class = "col-md-3"></div> 
+                <div class = "col-md-1 remove" ng-click = "remove($index)"> Remove </div>
+                <div class = "col-md-2"></div> 
             </div>
         </div>
 
@@ -63,7 +64,8 @@
 
         <div class = "row">
             <div class = "col-md-2"></div>
-            <div ng-show = "warningMessage != ''" class = "warningMessage"> {{warningMessage}} </div>
+            <div ng-show = "warningMessage != ''" class = "warningMessage col-md-6"> {{warningMessage}} </div>
+            <div ng-show = "warningMessage != ''" class = "col-md-2 dismiss" ng-click = "dismiss()"> dismiss </div>
         </div>
 
         <div ng-show = "showSavedRows">

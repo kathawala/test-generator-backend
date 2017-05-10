@@ -81,10 +81,10 @@ cs194proj.controller('MainController', ['$scope', '$http', function($scope, $htt
       if ($scope.selectorList.length == 0 && listItem.action != 'navigate to url') {
         $scope.warningMessage = 'You must navigate to a website before you can run any tests!';
       }
-      else if (listItem.action == 'navigate to url' && listItem.url == undefined) {
+      else if (listItem.action == 'navigate to url' && listItem.url == '') {
         $scope.warningMessage = 'You must input a value for the URL!';
       }
-      else if (listItem.action != 'navigate to url' && listItem.selector == undefined) {
+      else if (listItem.action != 'navigate to url' && listItem.selector == '') {
         $scope.warningMessage = 'You must input a value for the selector!';
       }
       else {
@@ -147,7 +147,7 @@ cs194proj.controller('MainController', ['$scope', '$http', function($scope, $htt
 
     $scope.addSnippet = function(name) {
       for (var i in $scope.savedRowsArray) {
-       if ($scope.savedRowsArray[i].name == name) {
+        if ($scope.savedRowsArray[i].name == name) {
           for (var j in $scope.savedRowsArray[i].values) {
             console.log($scope.savedRowsArray[i].values[j].action);
 
@@ -160,8 +160,25 @@ cs194proj.controller('MainController', ['$scope', '$http', function($scope, $htt
               $scope.warningMessage = '';
             }
           }
-       }
+        }
       }
+    }
+
+    $scope.remove = function(index) {
+      if (index == 0 && $scope.selectorList.length > 1) {
+        if ($scope.selectorList[1].action != 'navigate to url') {
+          $scope.warningMessage = 'You must navigate to a website before you can run any tests!';
+        }
+      }
+      else {
+        $scope.selectorList.splice(index, 1);
+        console.log("removing");
+      }
+    }
+
+    $scope.dismiss = function() {
+      console.log("dismissing");
+      $scope.warningMessage = '';
     }
   
 }]);
