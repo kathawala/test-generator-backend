@@ -195,8 +195,10 @@ cs194proj.controller('MainController', ['$scope', '$http', function($scope, $htt
       for(var i=0; i < 10; i++) {
         random += charset.charAt(Math.floor(Math.random() * charset.length));
       }
+      console.log(random);
       random += '.py';
-      $scope.randomName = name;
+      console.log(random);
+      $scope.randomName = random;
     }
 
 }]);
