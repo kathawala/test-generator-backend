@@ -13,6 +13,7 @@ cs194proj.controller('MainController', ['$scope', '$http', function($scope, $htt
     $scope.main.title = 'cs194proj';
 
     $scope.selectorList = [];
+    $scope.selectorListCopy = [];
 
     $scope.warningMessage = '';
     $scope.showScript = false;
@@ -201,8 +202,17 @@ cs194proj.controller('MainController', ['$scope', '$http', function($scope, $htt
       $scope.randomName = random;
     }
 
-    $scope.dropped = function(event, ui) {
-      console.log("test");
-    }
+    $scope.dropCallback = function() {
+      console.log("dropped");
+      if ($scope.selectorList[0].action != "navigate to url") {
+        console.log("OBJECTION");
+        $scope.selectorList = $scope.selectorListCopy;
+        $scope.warningMessage = 'You must navigate to a website before you can run any tests!';
+      }
+    };
 
+    $scope.startCallback = function() {
+      console.log("saving current order");
+      $scope.selectorListCopy = angular.copy($scope.selectorList);
+    }
 }]);

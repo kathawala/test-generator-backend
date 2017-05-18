@@ -24,7 +24,7 @@
 
         <div class = "createPrompt"> Create a script!!!! </div>
  
-        <div ng-repeat="item in selectorList" data-drop="true" data-drag="true" ng-model="selectorList" jqyoui-droppable="{index: {{$index}}}" jqyoui-draggable="{index: {{$index}}, insertInline: true, direction:'jqyouiDirection'}" data-jqyoui-options="{revert: 'invalid'}" data-direction="{{item.jqyouiDirection}}">
+        <div ng-repeat="item in selectorList" data-drop="true" data-drag="true" ng-model="selectorList" jqyoui-droppable="{index: {{$index}}, onDrop:'dropCallback',}" jqyoui-draggable="{index: {{$index}}, insertInline: true, direction:'jqyouiDirection',animate: true, onStart: 'startCallback'}" data-jqyoui-options="{revert: 'invalid'}" data-direction="{{item.jqyouiDirection}}">
             <div class = "row">
                 <div class = "col-md-2"></div>
                 <div class = "addedRow col-md-8">
