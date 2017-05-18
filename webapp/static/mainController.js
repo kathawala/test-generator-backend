@@ -1,6 +1,6 @@
 "use strict";
 
-var cs194proj = angular.module('cs194proj', []);
+var cs194proj = angular.module('cs194proj', ['ngDragDrop']);
 
 cs194proj.config(['$compileProvider',
   function ($compileProvider) {
@@ -17,6 +17,8 @@ cs194proj.controller('MainController', ['$scope', '$http', function($scope, $htt
     $scope.warningMessage = '';
     $scope.showScript = false;
     $scope.showSavedRows = false;
+
+    $scope.dragging = false;
 
    $scope.listItems = [{
 	    action: '',
@@ -149,8 +151,6 @@ cs194proj.controller('MainController', ['$scope', '$http', function($scope, $htt
       for (var i in $scope.savedRowsArray) {
         if ($scope.savedRowsArray[i].name == name) {
           for (var j in $scope.savedRowsArray[i].values) {
-            console.log($scope.savedRowsArray[i].values[j].action);
-
             var copy = angular.copy($scope.savedRowsArray[i].values[j]);
             if ($scope.selectorList.length == 0 && copy.action != 'navigate to url') {
               $scope.warningMessage = 'You must navigate to a website before you can run any tests!';
@@ -199,6 +199,10 @@ cs194proj.controller('MainController', ['$scope', '$http', function($scope, $htt
       random += '.py';
       console.log(random);
       $scope.randomName = random;
+    }
+
+    $scope.dropped = function(event, ui) {
+      console.log("test");
     }
 
 }]);
