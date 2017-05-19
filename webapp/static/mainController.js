@@ -209,6 +209,7 @@ cs194proj.controller('MainController', ['$scope', '$http', function($scope, $htt
         $scope.selectorList = $scope.selectorListCopy;
         $scope.warningMessage = 'You must navigate to a website before you can run any tests!';
       }
+      else $scope.warningMessage = "";
     };
 
     $scope.startCallback = function() {
