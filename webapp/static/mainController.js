@@ -9,6 +9,8 @@ cs194proj.config(['$compileProvider',
 ]);
 
 cs194proj.controller('MainController', ['$scope', '$http', function($scope, $http) {
+    $scope.loggedIn = false;
+
     $scope.main = {};
     $scope.main.title = 'cs194proj';
 

@@ -117,3 +117,14 @@
 	font-size: 20px;
 	background-color: #7FC8CF;
 }
+
+.verticalCenter {
+	height: 50px;
+	line-height: 50px;
+	margin-top: 25px;
+}
+
+.space {
+	height: 100px;
+}
+

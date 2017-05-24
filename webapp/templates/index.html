@@ -18,8 +18,22 @@
 
         <div class = "titleBar row"> 
             <div class = "col-md-3 element"> Arsenic Webdriver </div>
-            <div class = "col-md-7 element"> </div>
-            <div class = "col-md-2 element"> user info </div> 
+            <div  class = "col-md-5 space"></div> 
+            <div ng-if="loggedIn == false" class = "verticalCenter">
+                <form action="/login" method="post"> 
+                        <div class = "col-md-1"> 
+                            <input type="text" name ="username">
+                        </div>
+                        <div class = "col-md-1"> 
+                            <input type="text" name ="password">
+                        </div>
+                        <div class = "col-md-1"> 
+                            <input type="submit" value="login">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div ng-if "loggedIn == true" class = "col-md-2 element"> user info </div> 
         </div>
 
         <div class = "createPrompt"> Create a script!!!! </div>
