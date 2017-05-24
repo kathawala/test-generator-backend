@@ -128,3 +128,24 @@
 	height: 100px;
 }
 
+.body {
+	width: 100%;
+}
+
+.embeddedSite {
+	width: 100%;
+	height: 300px;
+}
+
+.addSnippetButton {
+	background-color: #7FC8CF;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	font-size: 30px;
+	font-weight: bold;
+}
+
+.adding {
+	background-color: #B2F0D3;
+}
