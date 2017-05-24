@@ -18,10 +18,10 @@ class Browser:
             print(elem)
         except NoSuchElementException:
             pass
-    def send(self, selector, value):
+    def enterText(self, selector, value):
         elems = self.driver.find_elements_by_css_selector(selector)
         if not elems:
-            print ("ERROR: Action('send') | Couldn't find element(s) specified by CSS selector: {x}".format(x=selector))
+            print ("ERROR: Action('enter text') | Couldn't find element(s) specified by CSS selector: {x}".format(x=selector))
         for elem in elems:
             elem.send_keys(value)
     def click(self, selector):
@@ -65,9 +65,9 @@ def handleNavigateToUrl(url):
     
     return "driver.get('{0}')\n".format(url)
 
-def handleSend(selector, value):
+def handleEnterText(selector, text):
 
-    return "browser.send('{0}', '{1}')\n".format(selector, value)
+    return "browser.enterText('{0}', '{1}')\n".format(selector, text)
 
     
 def processEvent(event):
@@ -78,9 +78,9 @@ def processEvent(event):
         
         return handleClick(event['selector'])
 
-    elif action == "send":
+    elif action == "enter text":
 
-        return handleSend(event['selector'], event['value'])
+        return handleEnterText(event['selector'], event['text'])
     
     elif action == "exists":
 
