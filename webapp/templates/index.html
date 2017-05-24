@@ -90,7 +90,7 @@
                 <div class = "row">
                     <div class = "col-md-2"></div>    
                     <div class = "col-md-6 subsetTitle"> {{item.name}} </div>
-                    <div class = "col-md-2 add" ng-click = "addSnippet(item.name)"> add this snippet </div>   
+                    <div class = "col-md-2 add" ng-click = "addSnippetToTest(item.name)"> add this snippet </div>   
                 </div>
                 <div ng-repeat = "jsonObject in item.values"> 
                     <div class = "row">
@@ -109,8 +109,84 @@
                     </div>
                 </div>  
             </div>
+
+            <div class = "row">
+                <div class = "col-md-2"></div>  
+                <div class = "col-md-8 addSnippetButton" ng-click = "addSnippetViewable = !addSnippetViewable"> add another snippet to your list </div>  
+            </div>
+
+            <!-- SNIPPET STUFF HERE -->
+            <div ng-if="addSnippetViewable == true" class = "adding">
+
+                <div class = "row" ng-if = "snippetNamed == false">
+                    <div class = "col-md-2"></div>
+                    <div class = "col-md-4 addSnippetDialogue">
+                        What do you want to call this snippet? 
+                    </div>
+                    <input class = "col-md-2 input" type = "text"  ng-model="model.currentSnippetName"/>
+                    <div class = "col-md-2 nameSnippet" ng-click = "nameSnippet()"> submit </div> 
+                </div> 
+
+                <div ng-if= "snippetNamed == true">
+                    <div class = "row snippetTitle">
+                        <div class = "col-md-2"></div>
+                        <div class = "col-md-8"> Snippet name: {{tempSnippet.name}} </div>
+                    </div>
+
+                    <!-- THIS DISPLAYS THE CURRENT SNIPPET IN PROGRESS -->
+                    <div ng-repeat="snippet in snippetInProgress" data-drop="true" data-drag="true" ng-model="snippetInProgress" jqyoui-droppable="{index: {{$index}},}" jqyoui-draggable="{index: {{$index}}, insertInline: true, direction:'jqyouiDirection',animate: true}" data-jqyoui-options="{revert: 'invalid'}" data-direction="{{item.jqyouiDirection}}">
+                                <div class = "row">
+                                    <div class = "col-md-2"></div>
+                                    <div class = "addedRow col-md-8">
+                                        <div class = "col-md-5 action"> {{snippet.action}} </div>
+                                        <div class = "col-md-5 secondary" ng-show = "snippet.selector != ''"> 
+                                            <div class = "label1"> Selector: </div>
+                                            <div class = "customized"> {{snippet.selector}} </div>
+                                        </div>
+                                        <div class = "col-md-5 secondary" ng-show = "snippet.url != ''"> 
+                                            <div class = "label1"> URL: </div>
+                                            <div class = "customized"> {{snippet.url}} </div>
+                                        </div>
+                                    </div>
+                                    <div class = "col-md-1 remove" ng-click = "removeSnippetRow($index)"> Remove </div>
+                                    <div class = "col-md-2"></div> 
+                                </div>
+                    </div> 
+
+    <!--                 THIS ADDS TO THE SNIPPET -->
+                    <div class = "row">
+                        <div class = "col-md-2"></div>
+
+                        <select name="cars" class = "col-md-2 input" ng-model = "snippetItem.action" ng-change = "selectedChanged()">
+                          <option value="navigate to url">navigate to</option>
+                          <option value="exists">check if exists</option>
+                          <option value="does not exist">check if doesn't exist</option>
+                          <option value="click">click on</option>
+                        </select>
+
+                        <div ng-show = "snippetItem.action != 'navigate to url'">
+                            <input class = "col-md-4 input margins" type="text" ng-model="snippetItem.selector" />
+                            <button class = "col-md-2 input" ng-click="addToSnippet(snippetItem)">Add</button>
+                        </div>
+
+                        <div ng-show = "snippetItem.action == 'navigate to url'">
+                            <input class = "col-md-4 input margins" type="text" ng-model="snippetItem.url" />
+                            <button class = "col-md-2 input" ng-click="addToSnippet(snippetItem)">Add</button>
+                        </div>
+
+                        <div class = "col-md-2"></div> 
+                    </div>
+
+                    <div class = "row">
+                        <div class = "col-md-4"></div>
+                        <div class = "col-md-4 button" ng-click = "addToSnippetList()"> add to snippets! </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
 
+        <!-- BUTTON STUFF HERE -->
         <div class = "row">
             <div class = "col-md-2"></div>
             <div class = "col-md-2 button" ng-click="addAnotherRow()"> add another row </div>

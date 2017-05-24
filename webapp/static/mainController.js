@@ -10,12 +10,19 @@ cs194proj.config(['$compileProvider',
 
 cs194proj.controller('MainController', ['$scope', '$http', function($scope, $http) {
     $scope.loggedIn = false;
+    $scope.addSnippetViewable = false;
+    $scope.snippetNamed = false;
+    $scope.tempSnippet = {};
+
+    $scope.model = {};
 
     $scope.main = {};
     $scope.main.title = 'cs194proj';
 
     $scope.selectorList = [];
     $scope.selectorListCopy = [];
+
+    $scope.snippetInProgress = [];
 
     $scope.warningMessage = '';
     $scope.showScript = false;
@@ -104,6 +111,58 @@ cs194proj.controller('MainController', ['$scope', '$http', function($scope, $htt
       }
   	}
 
+    $scope.addToSnippetList = function() {
+      if ($scope.snippetInProgress.length != 0) {
+        $scope.tempSnippet.values = angular.copy($scope.snippetInProgress);
+        $scope.savedRowsArray.push(angular.copy($scope.tempSnippet));
+        $scope.tempSnippet = {};
+        $scope.snippetInProgress = [];
+        $scope.addSnippetViewable = false;
+        $scope.snippetNamed = false;
+        $scope.model.currentSnippetName = '';
+      }
+    }
+
+    //neeaten this. only need 1 of the 2
+    $scope.addToSnippet = function(snippetItem) {  
+      //set appropriate things to ''
+      if (snippetItem.action == 'navigate to url') {
+        snippetItem.selector = '';
+        console.log("her33e");
+      }
+      if (snippetItem.action == 'exists' || snippetItem.action == 'does not exist' || snippetItem.action == 'click') {
+        snippetItem.url = '';
+        console.log("here");
+        console.log(snippetItem.url);
+      }
+
+      if (snippetItem.action == 'navigate to url' && snippetItem.url == '') {
+        $scope.warningMessage = 'You must input a value for the URL!';
+      }
+      else if (snippetItem.action != 'navigate to url' && snippetItem.selector == '') {
+        $scope.warningMessage = 'You must input a value for the selector!';
+      }
+      else {
+        $scope.snippetInProgress.push(angular.copy(snippetItem));
+        $scope.warningMessage = '';
+
+        snippetItem.action = '';
+        snippetItem.selector = '';
+        snippetItem.url = '';
+      }
+    }
+
+    $scope.nameSnippet = function() {
+      if ($scope.model.currentSnippetName == '') {
+        console.log("YEET THIS BITCH EMPTY");
+      }
+      else {
+        $scope.tempSnippet.name = angular.copy($scope.model.currentSnippetName);
+        console.log($scope.tempSnippet);
+        $scope.snippetNamed = true;
+      }
+    }
+
   $scope.generate = function() {
     if ($scope.selectorList.length == 0) {
       $scope.warningMessage = 'Your script will be empty!';
@@ -150,7 +209,7 @@ cs194proj.controller('MainController', ['$scope', '$http', function($scope, $htt
       $scope.showSavedRows = !$scope.showSavedRows;
     }
 
-    $scope.addSnippet = function(name) {
+    $scope.addSnippetToTest = function(name) {
       for (var i in $scope.savedRowsArray) {
         if ($scope.savedRowsArray[i].name == name) {
           for (var j in $scope.savedRowsArray[i].values) {
@@ -181,8 +240,11 @@ cs194proj.controller('MainController', ['$scope', '$http', function($scope, $htt
       }
       else {
         $scope.selectorList.splice(index, 1);
-        console.log("removing");
       }
+    }
+
+    $scope.removeSnippetRow = function(index) {
+        $scope.snippetInProgress.splice(index, 1);
     }
 
     $scope.dismiss = function() {

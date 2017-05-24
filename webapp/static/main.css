@@ -149,3 +149,28 @@
 .adding {
 	background-color: #B2F0D3;
 }
+
+.addSnippetDialogue {
+	height: 75px;
+	line-height: 75px;
+	font-size: 20px;
+}
+
+.nameSnippet {
+	height: 50px;
+	line-height: 50px;
+	font-size: 20px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding-left: 5px;
+	background-color: #6CA8CF;
+}
+
+.snippetTitle {
+	height: 50px;
+	line-height: 50px;
+	font-size: 20px;
+	margin-bottom: 10px;
+	padding-left: 5px;
+	background-color: #B5D6D7;
+}
