@@ -1,6 +1,9 @@
 {
-  "browser_type": "Firefox",
-  "input": [
+  "browser_types": [
+    "Firefox",
+    "Chrome"
+  ],
+  "actions": [
     {
       "action": "navigate to url",
       "url": "https://www.poetryfoundation.org/"

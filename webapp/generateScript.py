@@ -1,4 +1,4 @@
-def initializeScript(browser_type):
+def initializeScript():
     
     template = """
 from selenium import webdriver
@@ -37,13 +37,14 @@ class Browser:
         for elem in elems:
             elem.clear()
 """
-    
+    return template
+
+def setBrowser(browser_type):
     browser_init = """
 driver = webdriver.{0}()
 browser = Browser(driver)
 """
-    return (template + browser_init.format(browser_type))
-    
+    return browser_init.format(browser_type)
     
 def handleClick(selector):
 
@@ -96,17 +97,21 @@ def processEvent(event):
         
     else:
 
-        return
+        return("")
 
 def generateScript(data):
     
-    output = initializeScript(data['browser_type'])
+    script_boilerplate  = initializeScript()
 
     timeline = data['actions']
-    for event in timeline:
-        output = output + processEvent(event)
+    output = ""
+    for browser_type in data['browser_types']:
+        output = output + setBrowser(browser_type)
+        for event in timeline:
+            output = output + processEvent(event)
+        output = output + "driver.quit()\n"
 
-    return output
+    return(script_boilerplate + output)
 
 # if __name__ == "__main__":
     # generateScript()
