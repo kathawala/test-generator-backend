@@ -69,7 +69,11 @@ A valid JSON request will be styled as follows
 
 ```Javascript
 {
-  "browser_type": "Firefox",
+  "browser_types": [
+  		   "Firefox",
+		   "Safari",
+		   "Chrome"
+  ]
   "actions": [
   	   // actions go in this array
   ]
