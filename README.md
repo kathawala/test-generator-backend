@@ -32,12 +32,19 @@ And run this command when you're done:
 deactivate
 ```
 
-### Step 2: Install requirements
+### Step 2: Install requirements / Setup database
 
-Run the following commands
+Run the following commands to install all the required packages (this only needs to be done once)
 
 ```
+$ cd webapp
 $ pip install -r requirements.txt
+```
+
+Run the following command to set up the database from scratch without any entries
+
+```
+$ bash initdb.sh
 ```
 
 ### Step 3: Code! Run tests! Launch the server!
@@ -45,7 +52,6 @@ $ pip install -r requirements.txt
 To launch the server do the following:
 
 ```
-$ cd webapp
 $ export FLASK_APP=app.py
 $ flask run
 ```
