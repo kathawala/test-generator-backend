@@ -179,7 +179,9 @@ cs194proj.controller('MainController', ['$scope', '$http', function($scope, $htt
 	}
 
 	var JSONObj = {
-	  "browser_type": "Firefox",
+	  "browser_types": [
+	    "Firefox"
+	  ],
 	  "actions": actions
 	}
 
