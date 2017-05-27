@@ -1,6 +1,9 @@
 "use strict";
 
-var cs194proj = angular.module('cs194proj', ['ngDragDrop']);
+var cs194proj = angular.module('cs194proj', ['ngDragDrop'], function($interpolateProvider) {
+    $interpolateProvider.startSymbol('[[');
+    $interpolateProvider.endSymbol(']]');
+});
 
 cs194proj.config(['$compileProvider',
   function ($compileProvider) {

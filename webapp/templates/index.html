@@ -14,6 +14,9 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     </head>
 
+    <!-- Because Angular and Flask both use "{{}}" to delimit special varibales, -->
+    <!-- we've changed the default Angular delimiter from "{{}}" to "[[]]" -->
+    
     <body class = "main">
 
         <div class = "titleBar row"> 
@@ -38,18 +41,18 @@
 
         <div class = "createPrompt"> Create a script!!!! </div>
  
-        <div ng-repeat="item in selectorList" data-drop="true" data-drag="true" ng-model="selectorList" jqyoui-droppable="{index: {{$index}}, onDrop:'dropCallback',}" jqyoui-draggable="{index: {{$index}}, insertInline: true, direction:'jqyouiDirection',animate: true, onStart: 'startCallback'}" data-jqyoui-options="{revert: 'invalid'}" data-direction="{{item.jqyouiDirection}}">
+        <div ng-repeat="item in selectorList" data-drop="true" data-drag="true" ng-model="selectorList" jqyoui-droppable="{index: [[$index]], onDrop:'dropCallback',}" jqyoui-draggable="{index: [[$index]], insertInline: true, direction:'jqyouiDirection',animate: true, onStart: 'startCallback'}" data-jqyoui-options="{revert: 'invalid'}" data-direction="[[item.jqyouiDirection]]">
             <div class = "row">
                 <div class = "col-md-2"></div>
                 <div class = "addedRow col-md-8">
-                    <div class = "col-md-5 action"> {{item.action}} </div>
+                    <div class = "col-md-5 action"> [[item.action]] </div>
                     <div class = "col-md-5 secondary" ng-show = "item.selector != ''"> 
                         <div class = "label1"> Selector: </div>
-                        <div class = "customized"> {{item.selector}} </div>
+                        <div class = "customized"> [[item.selector]] </div>
                     </div>
                     <div class = "col-md-5 secondary" ng-show = "item.url != ''"> 
                         <div class = "label1"> URL: </div>
-                        <div class = "customized"> {{item.url}} </div>
+                        <div class = "customized"> [[item.url]] </div>
                     </div>
                 </div>
                 <div class = "col-md-1 remove" ng-click = "remove($index)"> Remove </div>
@@ -81,7 +84,7 @@
 
         <div class = "row">
             <div class = "col-md-2"></div>
-            <div ng-show = "warningMessage != ''" class = "warningMessage col-md-6"> {{warningMessage}} </div>
+            <div ng-show = "warningMessage != ''" class = "warningMessage col-md-6"> [[warningMessage]] </div>
             <div ng-show = "warningMessage != ''" class = "col-md-2 dismiss" ng-click = "dismiss()"> dismiss </div>
         </div>
 
@@ -89,21 +92,21 @@
             <div ng-repeat = "item in savedRowsArray">
                 <div class = "row">
                     <div class = "col-md-2"></div>    
-                    <div class = "col-md-6 subsetTitle"> {{item.name}} </div>
+                    <div class = "col-md-6 subsetTitle"> [[item.name]] </div>
                     <div class = "col-md-2 add" ng-click = "addSnippetToTest(item.name)"> add this snippet </div>   
                 </div>
                 <div ng-repeat = "jsonObject in item.values"> 
                     <div class = "row">
                         <div class = "col-md-2"></div>
                         <div class = "addedRow col-md-8">
-                            <div class = "col-md-5"> {{jsonObject.action}} </div>
+                            <div class = "col-md-5"> [[jsonObject.action]] </div>
                             <div class = "col-md-5" ng-show = "jsonObject.selector != ''"> 
                                 <div class = "label1"> Selector: </div>
-                                <div class = "customized"> {{jsonObject.selector}} </div>
+                                <div class = "customized"> [[jsonObject.selector]] </div>
                             </div>
                             <div class = "col-md-5" ng-show = "jsonObject.url != ''"> 
                                 <div class = "label1"> URL: </div>
-                                <div class = "customized"> {{jsonObject.url}} </div>
+                                <div class = "customized"> [[jsonObject.url]] </div>
                             </div>
                         </div>
                     </div>
@@ -130,22 +133,22 @@
                 <div ng-if= "snippetNamed == true">
                     <div class = "row snippetTitle">
                         <div class = "col-md-2"></div>
-                        <div class = "col-md-8"> Snippet name: {{tempSnippet.name}} </div>
+                        <div class = "col-md-8"> Snippet name: [[tempSnippet.name]] </div>
                     </div>
 
                     <!-- THIS DISPLAYS THE CURRENT SNIPPET IN PROGRESS -->
-                    <div ng-repeat="snippet in snippetInProgress" data-drop="true" data-drag="true" ng-model="snippetInProgress" jqyoui-droppable="{index: {{$index}},}" jqyoui-draggable="{index: {{$index}}, insertInline: true, direction:'jqyouiDirection',animate: true}" data-jqyoui-options="{revert: 'invalid'}" data-direction="{{item.jqyouiDirection}}">
+                    <div ng-repeat="snippet in snippetInProgress" data-drop="true" data-drag="true" ng-model="snippetInProgress" jqyoui-droppable="{index: [[$index]],}" jqyoui-draggable="{index: [[$index]], insertInline: true, direction:'jqyouiDirection',animate: true}" data-jqyoui-options="{revert: 'invalid'}" data-direction="[[item.jqyouiDirection]]">
                                 <div class = "row">
                                     <div class = "col-md-2"></div>
                                     <div class = "addedRow col-md-8">
-                                        <div class = "col-md-5 action"> {{snippet.action}} </div>
+                                        <div class = "col-md-5 action"> [[snippet.action]] </div>
                                         <div class = "col-md-5 secondary" ng-show = "snippet.selector != ''"> 
                                             <div class = "label1"> Selector: </div>
-                                            <div class = "customized"> {{snippet.selector}} </div>
+                                            <div class = "customized"> [[snippet.selector]] </div>
                                         </div>
                                         <div class = "col-md-5 secondary" ng-show = "snippet.url != ''"> 
                                             <div class = "label1"> URL: </div>
-                                            <div class = "customized"> {{snippet.url}} </div>
+                                            <div class = "customized"> [[snippet.url]] </div>
                                         </div>
                                     </div>
                                     <div class = "col-md-1 remove" ng-click = "removeSnippetRow($index)"> Remove </div>
@@ -190,7 +193,7 @@
         <div class = "row">
             <div class = "col-md-2"></div>
             <div class = "col-md-2 button" ng-click="addAnotherRow()"> add another row </div>
-            <div class = "col-md-2 button" ng-click="generate(); changeName()"> {{generateMessage}} </div>
+            <div class = "col-md-2 button" ng-click="generate(); changeName()"> [[generateMessage]] </div>
             <div class = "col-md-2 button" ng-click="clear()"> start over </div>
             <div class = "col-md-2 button" ng-click="savedRows()"> add saved rows </div>
         </div>
@@ -198,7 +201,7 @@
         <div ng-show = "showScript"> 
             <div class = "row">
                 <div class = "col-md-2"></div>
-                <div class = "col-md-8 scroll"> <pre>{{generatedScript}}</pre> </div>
+                <div class = "col-md-8 scroll"> <pre>[[generatedScript]]</pre> </div>
             </div>
         </div> 
 
@@ -206,7 +209,7 @@
 
         <div class = "row" ng-show = "showScript">
             <div class = "col-md-2"></div>
-            <a download="{{randomName}}" ng-href="{{url}}" class = "col-md-2 button"> download this script </a>
+            <a download="[[randomName]]" ng-href="[[url]]" class = "col-md-2 button"> download this script </a>
         </div>
 
     </body>
