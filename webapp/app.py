@@ -1,5 +1,6 @@
 import json
 import os
+import uuid
 from urllib.parse import urlparse, urljoin
 
 from generateScript import generateScript
@@ -7,15 +8,18 @@ from generateScript import generateScript
 from flask import Flask, request, make_response, session, g, redirect, url_for, abort, render_template, flash
 from sqlite3 import dbapi2 as sqlite3
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import login_required, LoginManager
+from flask_login import login_required, LoginManager, login_user, logout_user
 from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
 
+with open('secretkey.txt', 'r') as f:
+    secret_key = f.read()
+
 app.config.update(dict(
-    # DATABASE=os.path.join(app.root_path, 'sqlite.db'),
     SQLALCHEMY_DATABASE_URI='sqlite:///' + os.path.join(app.root_path, 'sqlite.db'),
-    SQLALCHEMY_TRACK_MODIFICATIONS=False
+    SQLALCHEMY_TRACK_MODIFICATIONS=False,
+    SECRET_KEY=secret_key
 ))
 
 db = SQLAlchemy(app)
@@ -37,13 +41,16 @@ class User(db.Model):
     # This pattern is for flask_sqlalchemy
     # it represents the User table in the database
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String, unique=True)
-    hashed_password = db.Column(db.String)
-    authenticated = db.Column(db.Boolean, default=False)
+    username = db.Column(db.String, unique=True, nullable=False)
+    hashed_password = db.Column(db.String, nullable=False)
+
+    # keep this so that on password reset we can disable all old login sessions
+    session_token = db.Column(db.String, unique=True, nullable=False)
 
     def __init__(self, username, password):
         self.username = username
         self.hashed_password = generate_password_hash(password)
+        self.session_token = str(uuid.uuid4())
         
     def __repr__(self):
         return '<User %r>' % self.username
@@ -52,10 +59,10 @@ class User(db.Model):
         return True
         
     def get_id(self):
-        return self.username
+        return str(self.session_token)
         
     def is_authenticated(self):
-        return self.authenticated
+        return True
 
     def is_anonymous(self):
         return False
@@ -81,31 +88,38 @@ class Snippet(db.Model):
 #####                   #####
 
 @login_manager.user_loader
-def user_loader(username):
-    return User.query.get(username)
+def load_user(session_token):
+    return User.query.filter_by(session_token=session_token).first()
 
 @app.route('/login', methods=['POST'])
 def login():
     error = None
     username = request.form['username']
     password = request.form['password']
-    user = User.query.get(username)
+    user = db.session.query(User).filter_by(username=username).first()
     if check_password_hash(user.hashed_password, password):
-        user.authenticated = True
-        db.session.add(user)
-        db.session.commit()
         login_user(user, remember=True)
         if request.referrer and is_safe_url(request.referrer):
             return redirect(request.referrer)
-        else:
-            return make_response(open('templates/index.html').read())
-    # else:
-        # error = 
-        
+    else:
+        error = "Wrong username/password"
+
+    return render_template('index.html')
+
+# from flask snippets: http://flask.pocoo.org/snippets/62/
 def is_safe_url(url):
     ref_url = urlparse(request.host_url)
-    test_url = urlparse(urljoin(request.host_url, target))
+    test_url = urlparse(urljoin(request.host_url, url))
     return test_url.scheme in ('http', 'https') and ref_url.netloc == test_url.netloc
+
+@app.route('/logout', methods=['GET'])
+@login_required
+def logout():
+    logout_user()
+    if request.referrer and is_safe_url(request.referrer):
+        return redirect(request.referrer)
+    else:
+        return render_template('index.html')
 
 #####                   #####
 ##### Routing Functions #####
@@ -113,7 +127,6 @@ def is_safe_url(url):
 
 @app.route('/', methods=['GET'])
 def main():
-    # return make_response(open('templates/index.html').read())
     return render_template('index.html')
     
 # @app.route('/', methods=['GET', 'POST'])
