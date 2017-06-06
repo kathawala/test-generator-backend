@@ -49,20 +49,42 @@
 	    {% endif %}
         </div>
 
-        <div class = "createPrompt"> Create a script!!!! </div>
+        <div class = "createPrompt"> Create a script! </div>
+
+        <div class = "row prompt"> 
+            <div class = "col-md-2"></div>
+            <div class = "col-md-2"> What browsers would you like to test on? </div>
+
+
+            <div ng-class = "{browser: firefoxSelected, browser2: !firefoxSelected}" class = "col-md-2 " ng-click = "firefoxSelected = !firefoxSelected"> Firefox </div>
+            <div ng-class = " {browser: chromeSelected, browser2: !chromeSelected} " class = "col-md-2" ng-click = "chromeSelected = !chromeSelected"> Chrome </div>
+            <div ng-class = " {browser: safariSelected, browser2: !safariSelected}" class = "col-md-2 " ng-click = "safariSelected = !safariSelected"> Safari </div>
+        </div>
+
+        <!-- need to set listItem.action = "navigate to url" -->
+        <div ng-if = "selectorList.length == 0" class = "row prompt"> 
+            <div class = "col-md-2"></div>
+            <div class = "col-md-4 center"> What website would you like to test? </div>
+            <input class = "col-md-2 input margins" type="text" ng-model="listItem.url" />
+            <button class = "col-md-2 input" ng-click="listItem.action = 'navigate to url'; add(listItem)">Add</button>
+        </div>
  
         <div ng-repeat="item in selectorList" data-drop="true" data-drag="true" ng-model="selectorList" jqyoui-droppable="{index: [[$index]], onDrop:'dropCallback',}" jqyoui-draggable="{index: [[$index]], insertInline: true, direction:'jqyouiDirection',animate: true, onStart: 'startCallback'}" data-jqyoui-options="{revert: 'invalid'}" data-direction="[[item.jqyouiDirection]]">
             <div class = "row">
                 <div class = "col-md-2"></div>
                 <div class = "addedRow col-md-8">
-                    <div class = "col-md-5 action"> [[item.action]] </div>
-                    <div class = "col-md-5 secondary" ng-show = "item.selector != ''"> 
+                    <div class = "col-md-3 action"> [[item.action]] </div>
+                    <div class = "col-md-3 secondary" ng-show = "item.selector != ''"> 
                         <div class = "label1"> Selector: </div>
                         <div class = "customized"> [[item.selector]] </div>
                     </div>
-                    <div class = "col-md-5 secondary" ng-show = "item.url != ''"> 
+                    <div class = "col-md-3 secondary" ng-show = "item.url != ''"> 
                         <div class = "label1"> URL: </div>
                         <div class = "customized"> [[item.url]] </div>
+                    </div>
+                    <div class = "col-md-3 secondary" ng-show = "item.text != ''"> 
+                        <div class = "label1"> Text: </div>
+                        <div class = "customized"> [[item.text]] </div>
                     </div>
                 </div>
                 <div class = "col-md-1 remove" ng-click = "remove($index)"> Remove </div>
@@ -78,14 +100,20 @@
               <option value="exists">check if exists</option>
               <option value="does not exist">check if doesn't exist</option>
               <option value="click">click on</option>
+              <option value="enter text">enter text in box</option>
             </select>
 
-            <div ng-show = "listItem.action != 'navigate to url'">
-                <input class = "col-md-4 input margins" type="text" ng-model="listItem.selector" />
+            <div ng-show = "listItem.action != 'navigate to url' && listItem.action != 'enter text' ">
+                <input class = "col-md-4 input margins" type="text" placeholder = "enter selector" ng-model="listItem.selector" />
+                <button class = "col-md-2 input" ng-click="add(listItem)">Add</button>
+            </div>
+            <div ng-show = "listItem.action == 'enter text' ">
+                <input class = "col-md-2 input margins" type="text" placeholder = "enter selector" ng-model="listItem.selector" />
+                <input class = "col-md-2 input margins" type="text" placeholder = "enter text" ng-model="listItem.text" />
                 <button class = "col-md-2 input" ng-click="add(listItem)">Add</button>
             </div>
             <div ng-show = "listItem.action == 'navigate to url'">
-                <input class = "col-md-4 input margins" type="text" ng-model="listItem.url" />
+                <input class = "col-md-4 input margins" type="text" placeholder = "enter url" ng-model="listItem.url" />
                 <button class = "col-md-2 input" ng-click="add(listItem)">Add</button>
             </div>
 
@@ -109,14 +137,18 @@
                     <div class = "row">
                         <div class = "col-md-2"></div>
                         <div class = "addedRow col-md-8">
-                            <div class = "col-md-5"> [[jsonObject.action]] </div>
-                            <div class = "col-md-5" ng-show = "jsonObject.selector != ''"> 
+                            <div class = "col-md-3"> [[jsonObject.action]] </div>
+                            <div class = "col-md-3" ng-show = "jsonObject.selector != ''"> 
                                 <div class = "label1"> Selector: </div>
                                 <div class = "customized"> [[jsonObject.selector]] </div>
                             </div>
-                            <div class = "col-md-5" ng-show = "jsonObject.url != ''"> 
+                            <div class = "col-md-3" ng-show = "jsonObject.url != ''"> 
                                 <div class = "label1"> URL: </div>
                                 <div class = "customized"> [[jsonObject.url]] </div>
+                            </div>
+                            <div class = "col-md-3" ng-show = "jsonObject.text != ''"> 
+                                <div class = "label1"> Text: </div>
+                                <div class = "customized"> [[jsonObject.text]] </div>
                             </div>
                         </div>
                     </div>
@@ -151,14 +183,18 @@
                                 <div class = "row">
                                     <div class = "col-md-2"></div>
                                     <div class = "addedRow col-md-8">
-                                        <div class = "col-md-5 action"> [[snippet.action]] </div>
-                                        <div class = "col-md-5 secondary" ng-show = "snippet.selector != ''"> 
+                                        <div class = "col-md-3 action"> [[snippet.action]] </div>
+                                        <div class = "col-md-3 secondary" ng-show = "snippet.selector != ''"> 
                                             <div class = "label1"> Selector: </div>
                                             <div class = "customized"> [[snippet.selector]] </div>
                                         </div>
-                                        <div class = "col-md-5 secondary" ng-show = "snippet.url != ''"> 
+                                        <div class = "col-md-3 secondary" ng-show = "snippet.url != ''"> 
                                             <div class = "label1"> URL: </div>
                                             <div class = "customized"> [[snippet.url]] </div>
+                                        </div>
+                                        <div class = "col-md-3 secondary" ng-show = "snippet.text != ''"> 
+                                            <div class = "label1"> Text: </div>
+                                            <div class = "customized"> [[snippet.text]] </div>
                                         </div>
                                     </div>
                                     <div class = "col-md-1 remove" ng-click = "removeSnippetRow($index)"> Remove </div>
@@ -175,15 +211,20 @@
                           <option value="exists">check if exists</option>
                           <option value="does not exist">check if doesn't exist</option>
                           <option value="click">click on</option>
+                          <option value="enter text">enter text in box</option>
                         </select>
 
-                        <div ng-show = "snippetItem.action != 'navigate to url'">
-                            <input class = "col-md-4 input margins" type="text" ng-model="snippetItem.selector" />
+                        <div ng-show = "snippetItem.action != 'navigate to url' && snippetItem.action != 'enter text' ">
+                            <input class = "col-md-4 input margins" type="text" placeholder = "enter selector" ng-model="snippetItem.selector" />
                             <button class = "col-md-2 input" ng-click="addToSnippet(snippetItem)">Add</button>
                         </div>
-
+                        <div ng-show = "snippetItem.action == 'enter text' ">
+                            <input class = "col-md-2 input margins" type="text" placeholder = "enter selector" ng-model="snippetItem.selector" />
+                            <input class = "col-md-2 input margins" type="text" placeholder = "enter text" ng-model="snippetItem.text" />
+                            <button class = "col-md-2 input" ng-click="addToSnippet(snippetItem)">Add</button>
+                        </div>
                         <div ng-show = "snippetItem.action == 'navigate to url'">
-                            <input class = "col-md-4 input margins" type="text" ng-model="snippetItem.url" />
+                            <input class = "col-md-4 input margins" type="text" placeholder = "enter url" ng-model="snippetItem.url" />
                             <button class = "col-md-2 input" ng-click="addToSnippet(snippetItem)">Add</button>
                         </div>
 

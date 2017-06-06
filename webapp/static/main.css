@@ -174,3 +174,32 @@
 	padding-left: 5px;
 	background-color: #B5D6D7;
 }
+
+.browser2 {
+	background-color: #78CF80;
+	height: 50px;
+	line-height: 50px;
+	font-size: 20px;
+	margin: 5px;
+	padding: 5px;
+}
+
+.browser {
+	background-color: #538F58;
+	height: 50px;
+	line-height: 50px;
+	font-size: 20px;
+	margin: 5px;
+	padding: 5px;
+}
+
+.prompt {
+	font-size: 20px;
+	margin: 20px;
+	background-color: #8DCECF;
+}
+
+.center {
+	height: 50px;
+	line-height: 50px;
+}

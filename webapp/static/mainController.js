@@ -32,6 +32,10 @@ cs194proj.controller('MainController', ['$scope', '$http', function($scope, $htt
 
     $scope.dragging = false;
 
+    $scope.firefoxSelected = true;
+    $scope.chromeSelected = false;
+    $scope.safariSelected = false;
+
    $scope.listItems = [{
 	    action: '',
 	    selector: '',
@@ -43,11 +47,13 @@ cs194proj.controller('MainController', ['$scope', '$http', function($scope, $htt
       name: "subset 1",
       values: [{ action: 'navigate to url',
         selector: '',
+        text: '',
         url: 'www.google.com',
       }, 
       { action: 'click',
         selector: 'example selector 1',
         url: '',
+        text: '',
       }]
     },
     {
@@ -55,25 +61,35 @@ cs194proj.controller('MainController', ['$scope', '$http', function($scope, $htt
       values: [{ action: 'click',
         selector: 'this should give an error if chosen first',
         url: '',
+        text: '',
       }, 
       { action: 'click',
         selector: 'example selector 2',
         url: '',
+        text: '',
       }]
     },
     {
       name: "subset 3",
       values: [{ action: 'navigate to url',
         selector: '',
+        text: '',
         url: 'www.amazon.com',
       }, 
       { action: 'exists',
         selector: 'example selector 3',
         url: '',
+        text: '',
       },
-      { action: 'click',
+      { action: 'enter text',
         selector: 'example selector 4',
         url: '',
+        text: 'test text',
+      },
+      { action: 'click',
+        selector: 'example selector 5',
+        url: '',
+        text: '',
       }]
     }];
 
@@ -87,8 +103,13 @@ cs194proj.controller('MainController', ['$scope', '$http', function($scope, $htt
       //set appropriate things to ''
       if (listItem.action == 'navigate to url') {
         listItem.selector = '';
+        listItem.text = '';
       }
       if (listItem.action == 'exists' || listItem.action == 'does not exist' || listItem.action == 'click') {
+        listItem.url = '';
+        listItem.text = '';
+      }
+      if (listItem.action == 'enter text') {
         listItem.url = '';
       }
 
@@ -130,12 +151,14 @@ cs194proj.controller('MainController', ['$scope', '$http', function($scope, $htt
       //set appropriate things to ''
       if (snippetItem.action == 'navigate to url') {
         snippetItem.selector = '';
-        console.log("her33e");
+        snippetItem.text = '';
       }
       if (snippetItem.action == 'exists' || snippetItem.action == 'does not exist' || snippetItem.action == 'click') {
         snippetItem.url = '';
-        console.log("here");
-        console.log(snippetItem.url);
+        snippetItem.text = '';
+      }
+      if (snippetItem.action == 'enter text') {
+        snippetItem.url = '';
       }
 
       if (snippetItem.action == 'navigate to url' && snippetItem.url == '') {
@@ -171,26 +194,41 @@ cs194proj.controller('MainController', ['$scope', '$http', function($scope, $htt
     }
     else {
 
-	var actions = new Array();
-	for (var i = 0; i < $scope.selectorList.length; i++) {
-	  var item = $scope.selectorList[i];
-	  actions.push(item)
-	}
+  	var actions = new Array();
+  	for (var i = 0; i < $scope.selectorList.length; i++) {
+  	  var item = $scope.selectorList[i];
+  	  actions.push(item)
+  	}
 
-	var JSONObj = {
-	  "browser_types": [
-	    "Firefox"
-	  ],
-	  "actions": actions
-	}
+    var JSONObj = {
+      "browser_types": [],
+      "actions": actions
+    }  
 
-	$http.post('/generate',JSON.stringify(JSONObj)).then(
-	  function(data, status, headers, config){
-	    $scope.generatedScript = data.data;
-	    var blob = new Blob([ $scope.generatedScript ], { type : 'text/plain' });
-	    $scope.url = (window.URL || window.webkitURL).createObjectURL( blob );
-	  }, function(data, status, headers, config){
-	    console.log(data);
+    if ($scope.firefoxSelected == true) {
+      JSONObj.browser_types.push("Firefox");
+      console.log("firefox");
+    }
+    if ($scope.chromeSelected == true) {
+      JSONObj.browser_types.push("Chrome");
+      console.log("chrome");
+    }
+    if ($scope.safariSelected == true) {
+      JSONObj.browser_types.push("Safari");
+      console.log("safari");
+    }
+
+    if (JSONObj.browser_types.length == 0) JSONObj.browser_types.push("Firefox");
+
+    console.log(JSONObj);
+
+    $http.post('/generate',JSON.stringify(JSONObj)).then(
+      function(data, status, headers, config){
+        $scope.generatedScript = data.data;
+        var blob = new Blob([ $scope.generatedScript ], { type : 'text/plain' });
+        $scope.url = (window.URL || window.webkitURL).createObjectURL( blob );
+      }, function(data, status, headers, config){
+        console.log(data);
 	  });
 
 	$scope.showScript = true; 
