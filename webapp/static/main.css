@@ -1,6 +1,65 @@
+/*COLOR PALETTE: 
+	-KULER monochromatic
+
+	-light base color: BEF7E7
+	-slightly darker color: 68DEBD
+	-other slightly darker color: 50AB91
+	-darkest color: 2C5E50
+	-desaturated darkest color: 495E58
+
+	-accent color: DE8368
+	-darker accent color: 913F27
+
+	-action color: 93F4F4
+	-darker action color: 6DA7A7
+*/
+
+* { 	
+	font-family: 'Quicksand', sans-serif;
+	font-size: 20px;
+}
+
+a:hover, a:visited, a:link, a:active {
+	text-decoration: none !important;
+	color: black !important;
+}
+
+.body {
+	width: 100%;
+	background-image: url("geometry2.png");
+}
+
+.availableSnippets {
+	font-size: 40px;
+	text-align: center;
+	font-weight: bold;
+	background-color: #50AB91;
+	margin-top: 20px;
+	margin-bottom: 10px;
+}
+
+.addButton {
+	background-color: #68DEBD;
+	text-align: center;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	line-height: 50px;
+	height: 50px;
+}
+
+.addButton2 {
+	background-color: #50AB91;
+	text-align: center;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	line-height: 50px;
+	height: 50px;
+}
+
 .titleBar {
-	background-color: #CB817B;
+	background-color: #68DEBD;
 	height: 100px;
+	font-weight: bold;
 }
 
 .element {
@@ -9,41 +68,43 @@
 }
 
 .main {
-	background-color: #CBB3B1;
 	height: 100%;
 }
 
 .addedRow {
-	background-color: white;
-	margin-top: 10px;
+	background-color: #BEF7E7;
+	margin-top: 5px;
 	margin-bottom: 10px;
 }
 
 .input {
-	height: 50px;
-	padding: 10px;
 	background-color: white;
 	margin-top: 10px;
 	margin-bottom: 10px;
+	line-height: 50px;
+	height: 50px;
+}
+
+.width {
+	width: 100%;
 }
 
 .createPrompt {
 	text-align: center;
 	font-size: 50px;
-	margin: 10px;
-	padding:10px;
+	margin: 5px;
+	font-weight: bold;
 }
 
 .warningMessage {
 	font-size: 20px;
-	color: red;
 }
 
 .action {
-	font-size: 30px;
+	font-size: 20px;
 	line-height: 50px;
 	height: 50px;
-	color: red;
+	font-weight: bold;
 }
 
 .secondary {
@@ -52,27 +113,24 @@
 }
 
 .label1 {
-	color: blue;
+	color: #495E58;
 	font-weight: bold;
 	display: inline-block;
 }
 
 .customized {
-	color: blue;
+	color: #495E58;
 	display: inline-block;
 }
 
-.margins {
-	margin-left: 10px;
-	margin-right: 10px;
-}
-
 .button {
-	background-color: white;
+	background-color: #50AB91;
 	height: 50px;
 	line-height: 50px;
-	font-size: 15px;
-	margin: 5px;
+	font-size: 20px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	text-align: center;
 }
 
 .scroll {
@@ -87,17 +145,17 @@
 }
 
 .subsetTitle {
-	background-color: #F0E8E8;
+	background-color: #68DEBD;
 	height: 50px;
 	line-height: 50px;
 	margin-top: 5px;
 	margin-bottom: 5px;
 	font-size: 40px;
-	color: red;
+	color: #495E58;
 }
 
 .add {
-	background-color: #F0CCE8;
+	background-color: #50AB91;
 	height: 50px;
 	line-height: 50px;
 	margin-top: 5px;
@@ -107,15 +165,20 @@
 .remove {
 	height: 50px;
 	line-height: 50px;
-	margin-top: 10px;
+	margin-top: 5px;
 	margin-bottom: 5px;
 	font-size: 20px;
-	background-color: #7FC8CF;
+	background-color: #DE8368;
 }
 
 .dismiss {
 	font-size: 20px;
-	background-color: #7FC8CF;
+	background-color: #DE8368;
+	height: 50px;
+	line-height: 50px;
+	margin-bottom: 10px;
+	margin-top: 10px;
+	text-align: center;
 }
 
 .verticalCenter {
@@ -128,32 +191,25 @@
 	height: 100px;
 }
 
-.body {
-	width: 100%;
-}
-
-.embeddedSite {
-	width: 100%;
-	height: 300px;
-}
-
 .addSnippetButton {
-	background-color: #7FC8CF;
+	background-color: #50AB91;
 	height: 50px;
 	line-height: 50px;
 	text-align: center;
 	font-size: 30px;
 	font-weight: bold;
+	margin-top: 10px;
 }
 
 .adding {
-	background-color: #B2F0D3;
+	background-color: #68DEBD;
 }
 
 .addSnippetDialogue {
 	height: 75px;
 	line-height: 75px;
 	font-size: 20px;
+	background-color: #50AB91;
 }
 
 .nameSnippet {
@@ -162,8 +218,8 @@
 	font-size: 20px;
 	margin-top: 10px;
 	margin-bottom: 10px;
-	padding-left: 5px;
-	background-color: #6CA8CF;
+	background-color: #68DEBD;
+	text-align: center;
 }
 
 .snippetTitle {
@@ -171,35 +227,47 @@
 	line-height: 50px;
 	font-size: 20px;
 	margin-bottom: 10px;
-	padding-left: 5px;
-	background-color: #B5D6D7;
+	background-color: #50AB91;
+}
+
+.color{
+	background-color: #50AB91;
 }
 
 .browser2 {
-	background-color: #78CF80;
+	background-color: #68DEBD;
 	height: 50px;
 	line-height: 50px;
 	font-size: 20px;
-	margin: 5px;
-	padding: 5px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	text-align: center;
 }
 
 .browser {
-	background-color: #538F58;
+	background-color: #50AB91;
 	height: 50px;
 	line-height: 50px;
 	font-size: 20px;
-	margin: 5px;
-	padding: 5px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	text-align: center;
 }
 
 .prompt {
 	font-size: 20px;
 	margin: 20px;
-	background-color: #8DCECF;
+	background-color: #BEF7E7;
 }
 
 .center {
 	height: 50px;
 	line-height: 50px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.center2 {
+	margin-top: 10px;
+	margin-bottom: 10px;
 }

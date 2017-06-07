@@ -36,6 +36,8 @@ cs194proj.controller('MainController', ['$scope', '$http', function($scope, $htt
     $scope.chromeSelected = false;
     $scope.safariSelected = false;
 
+    $scope.snippetMessage = "add snippets";
+
    $scope.listItems = [{
 	    action: '',
 	    selector: '',
@@ -100,37 +102,45 @@ cs194proj.controller('MainController', ['$scope', '$http', function($scope, $htt
     $scope.show = false;
 
   	$scope.add = function(listItem) {  
-      //set appropriate things to ''
-      if (listItem.action == 'navigate to url') {
-        listItem.selector = '';
-        listItem.text = '';
-      }
-      if (listItem.action == 'exists' || listItem.action == 'does not exist' || listItem.action == 'click') {
-        listItem.url = '';
-        listItem.text = '';
-      }
-      if (listItem.action == 'enter text') {
-        listItem.url = '';
-      }
-
-      if ($scope.selectorList.length == 0 && listItem.action != 'navigate to url') {
-        $scope.warningMessage = 'You must navigate to a website before you can run any tests!';
-      }
-      else if (listItem.action == 'navigate to url' && listItem.url == '') {
-        $scope.warningMessage = 'You must input a value for the URL!';
-      }
-      else if (listItem.action != 'navigate to url' && listItem.selector == '') {
-        $scope.warningMessage = 'You must input a value for the selector!';
+      if (listItem== undefined) {
+        $scope.warningMessage = 'You must choose an action!';
       }
       else {
-        $scope.selectorList.push(angular.copy(listItem));
-        $scope.warningMessage = '';
+        console.log(listItem.URL);
 
-        $scope.show = !$scope.show;
+        if (listItem.action == 'navigate to url') {
+          listItem.selector = '';
+          listItem.text = '';
+        }
+        if (listItem.action == 'exists' || listItem.action == 'does not exist' || listItem.action == 'click') {
+          listItem.url = '';
+          listItem.text = '';
+        }
+        if (listItem.action == 'enter text') {
+          listItem.url = '';
+        }
 
-        listItem.action = '';
-        listItem.selector = '';
-        listItem.url = '';
+
+        else if ($scope.selectorList.length == 0 && listItem.action != 'navigate to url') {
+          $scope.warningMessage = 'You must navigate to a website before you can run any tests!';
+        }
+        else if (listItem.action == 'navigate to url' && (listItem.url == '' || listItem.url == undefined)) {
+          $scope.warningMessage = 'You must input a value for the URL!';
+          console.log("here");
+        }
+        else if (listItem.action != 'navigate to url' && listItem.selector == '') {
+          $scope.warningMessage = 'You must input a value for the selector!';
+        }
+        else {
+          $scope.selectorList.push(angular.copy(listItem));
+          $scope.warningMessage = '';
+
+          $scope.show = !$scope.show;
+
+          listItem.action = '';
+          listItem.selector = '';
+          listItem.url = '';
+        }
       }
   	}
 
@@ -249,6 +259,8 @@ cs194proj.controller('MainController', ['$scope', '$http', function($scope, $htt
     $scope.savedRows = function() {
       $scope.show = false;
       $scope.showSavedRows = !$scope.showSavedRows;
+      if ($scope.showSavedRows == true) $scope.snippetMessage = "hide snippets";
+      else $scope.snippetMessage = "add snippets";
     }
 
     $scope.addSnippetToTest = function(name) {
@@ -283,6 +295,10 @@ cs194proj.controller('MainController', ['$scope', '$http', function($scope, $htt
       else {
         $scope.selectorList.splice(index, 1);
       }
+    }
+
+    $scope.removeSnippet = function(index) {
+      $scope.savedRowsArray.splice(index, 1);
     }
 
     $scope.removeSnippetRow = function(index) {
