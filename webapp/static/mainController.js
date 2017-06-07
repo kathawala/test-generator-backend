@@ -120,8 +120,7 @@ cs194proj.controller('MainController', ['$scope', '$http', function($scope, $htt
           listItem.url = '';
         }
 
-
-        else if ($scope.selectorList.length == 0 && listItem.action != 'navigate to url') {
+        if ($scope.selectorList.length == 0 && listItem.action != 'navigate to url') {
           $scope.warningMessage = 'You must navigate to a website before you can run any tests!';
         }
         else if (listItem.action == 'navigate to url' && (listItem.url == '' || listItem.url == undefined)) {
@@ -140,6 +139,7 @@ cs194proj.controller('MainController', ['$scope', '$http', function($scope, $htt
           listItem.action = '';
           listItem.selector = '';
           listItem.url = '';
+          listItem.text = '';
         }
       }
   	}
@@ -184,6 +184,7 @@ cs194proj.controller('MainController', ['$scope', '$http', function($scope, $htt
         snippetItem.action = '';
         snippetItem.selector = '';
         snippetItem.url = '';
+        snippetItem.text = '';
       }
     }
 
