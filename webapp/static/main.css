@@ -12,16 +12,19 @@
 
 	-action color: 93F4F4
 	-darker action color: 6DA7A7
+
+	-grey: 1C1C1C;
 */
 
 * { 	
 	font-family: 'Quicksand', sans-serif;
 	font-size: 20px;
+	color: #1C1C1C;
 }
 
 a:hover, a:visited, a:link, a:active {
 	text-decoration: none !important;
-	color: black !important;
+	color: #1C1C1C !important;
 }
 
 .body {
@@ -94,6 +97,7 @@ a:hover, a:visited, a:link, a:active {
 	font-size: 50px;
 	margin: 5px;
 	font-weight: bold;
+	margin-top: 20px;
 }
 
 .warningMessage {
@@ -129,6 +133,16 @@ a:hover, a:visited, a:link, a:active {
 	line-height: 50px;
 	font-size: 20px;
 	margin-top: 20px;
+	margin-bottom: 20px;
+	text-align: center;
+}
+
+.button2 {
+	background-color: #50AB91;
+	height: 50px;
+	line-height: 50px;
+	font-size: 20px;
+	margin-top: 5px;
 	margin-bottom: 20px;
 	text-align: center;
 }
