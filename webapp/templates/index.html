@@ -27,34 +27,133 @@
 
         <div class = "titleBar row"> 
             <div class = "col-md-3 element"> Arsenic Webdriver </div>
-            <div class = "col-md-5 space"></div> 
+            <div class = "col-md-3 space"></div> 
+
 	    {% if current_user.is_authenticated %}
+            <div class = "col-md-1 space"></div> 
             <div class = "col-md-2 element">Hi {{ current_user.username }}!</div>
-	    <form action="/logout" method="get">
-		<div class="col-md-1">
-		    <input type="submit" value="logout"></input>
-		</div>
-	    </form>
-	    {% else %}
-            <div class="verticalCenter col-md-1 element">
-		<div class="button register-button">register</div>
-	    </div>
-	    <div class="verticalCenter col-md-1 element" >
-		<div class="button sign-up-button">sign up</div>
-                <!-- <form action="/login" method="post"> 
-                     <div class = "col-md-1"> 
-                     <input type="text" name ="username">
-                     </div>
-                     <div class = "col-md-1"> 
-                     <input type="text" name ="password">
-                     </div>
-                     <div class = "col-md-1"> 
-                     <input type="submit" value="login">
-                     </div>
-                     </div>
-                     </form> -->
+            <form action="/logout" method="get">
+            <div class="col-md-1">
+                <input type="submit form-control" value="logout"></input>
             </div>
+            </form>
+
+	    {% else %}
+            <div class="verticalCenter col-md-2">
+                <div class="button">log in</div>
+            </div>
+            <div class = "verticalCenter col-md-2"> 
+                <div class="button" ng-click="registerDialogueVisible = !registerDialogueVisible">register</div>
+            </div> 
+            <!-- <form action="/login" method="post"> 
+             <div class = "col-md-1"> 
+             <input type="text" name ="username">
+             </div>
+             <div class = "col-md-1"> 
+             <input type="text" name ="password">
+             </div>
+             <div class = "col-md-1"> 
+             <input type="submit" value="login">
+             </div>
+             </div>
+             </form> -->
 	    {% endif %}
+
+        </div>
+
+        <div ng-if="registerDialogueVisible == true" class = "registerDialogue"> 
+            <div class = "row">
+                <div class = "col-md-1"></div>
+                <div class = "col-md-1 registerRow">
+                    <div> username: </div>
+                </div>
+                <div class = "col-md-2">
+                    <div> <input class = "input form-control" type = "text"></input> </div>
+                </div>
+                <div class = "col-md-1 registerRow">
+                    <div> password: </div>
+                </div>
+                <div class = "col-md-2">
+                    <div> <input class = "input form-control" type = "text"></input> </div>
+                </div>
+                <div class = "col-md-2 registerRow">
+                    <div> repeat password: </div>
+                </div>
+                <div class = "col-md-2">
+                    <div> <input class = "input form-control" type = "text"></input> </div>
+                </div>
+            </div>
+            <div class = "row">
+                <div class = "col-md-4"></div>
+                <div class = "col-md-4">
+                    <div class = "button"> create account </div>
+                </div>
+            </div>
+        </div>
+
+        <div ng-if = "FAQShown" class = "FAQ">
+            <div class = "row textAlign"> 
+                <div class = "col-md-2"></div>
+                <div class = "col-md-8 textAlign">
+                    Welcome to Arsenic Webdriver! 
+                </div>
+            </div>
+
+            <div class = "row textAlign2"> 
+                <div class = "col-md-2"></div>
+                <div class = "col-md-8">
+                    What does Arsenic Webdriver do? 
+                </div>
+            </div>
+
+            <div class = "row"> 
+                <div class = "col-md-2"></div>
+                <div class = "col-md-8">
+                    Arsenic Webdriver is an easy-to-use tool that allows you to easily generate python scripts to user-test your websites! These scripts run using Selenium Webdriver (more info here: http://www.seleniumhq.org/projects/webdriver/) and can be run any way you see fit. You can add individual rows to your tests, as well as defining snippets of rows to be inserted in your tests as you see fit. No engineering experience necessary! When you're done, you can generate and download your scripts using the buttons at the bottom of the page. 
+                </div>
+            </div>
+
+            <div class = "row textAlign2"> 
+                <div class = "col-md-2"></div>
+                <div class = "col-md-8">
+                    I'm a beginner. What do you mean by "selector"? 
+                </div>
+            </div>
+
+            <div class = "row"> 
+                <div class = "col-md-2"></div>
+                <div class = "col-md-8">
+                    Every webpage is made up of individual blocks known as "HTML elements." Each of these blocks has a "selector" assigned to it that allows you to identify it. If you go onto the webpage you would like to test and press "Shift + Command + C", the "developer console" will pop up on your browser. One of the tabs of this console will be the "Elements" tab. If you navigate to this tab, you will be able to click on elements of your website and see the part of your code that defines the elements you've clicked on be highlighted in the console. If you right click on the highlighted text, you will see a "copy" option. In the drop-down "copy" list, choose "copy selector" and then paste that into Arsenic Webdriver's text boxes to test it in any way you see fit! 
+                </div>
+            </div>
+
+            <div class = "row textAlign2"> 
+                <div class = "col-md-2"></div>
+                <div class = "col-md-8">
+                    What else do I need to do to use these tests? 
+                </div>
+            </div>
+
+            <div class = "row"> 
+                <div class = "col-md-2"></div>
+                <div class = "col-md-8">
+                    To run these tests, you will need to have python installed on your computer. In addition, you will need to download the webdrivers you need (Safari, Chrome, Firefox) and define your $PATH variables accordingly. 
+                </div>
+            </div>
+
+            <div class = "row textAlign2"> 
+                <div class = "col-md-2"></div>
+                <div class = "col-md-8">
+                    Happy testing! 
+                </div>
+            </div>
+        </div>
+
+        <div class = "row FAQ">
+            <div class = "col-md-4"> </div>
+            <div class = "col-md-4">
+                <div class = "button" ng-click = "FAQChange();"> [[FAQMessage]] </div> 
+            </div>
         </div>
 
         <div class = "createPrompt"> Create a script! </div>

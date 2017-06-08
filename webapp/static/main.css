@@ -22,6 +22,34 @@
 	color: #1C1C1C;
 }
 
+.registerDialogue {
+	background-color: #BEF7E7;
+}
+
+.textAlign {
+	text-align: center;
+	font-size: 40px !important;
+	font-weight: bold;
+	margin-bottom: 5px; 
+}
+
+.textAlign2 {
+	text-align: center;
+	font-size: 40px !important;
+	font-weight: bold;
+	margin-top: 10px;
+}
+
+.registerRow {
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+
+.FAQ {
+	background-color: #BEF7E7;
+	padding-top: 10px;
+}
+
 a:hover, a:visited, a:link, a:active {
 	text-decoration: none !important;
 	color: #1C1C1C !important;
@@ -74,14 +102,6 @@ a:hover, a:visited, a:link, a:active {
 	height: 100%;
 }
 
-.register-button {
-    color: #bef7e7;
-}
-
-.sign-up-button {
-    background-color: #bef7e7;
-}
-
 .addedRow {
 	background-color: #BEF7E7;
 	margin-top: 5px;
@@ -130,10 +150,6 @@ a:hover, a:visited, a:link, a:active {
 	display: inline-block;
 }
 
-.last-button-row {
-    margin-top: 20px;
-}
-
 .customized {
 	color: #495E58;
 	display: inline-block;
@@ -144,6 +160,7 @@ a:hover, a:visited, a:link, a:active {
 	height: 50px;
 	line-height: 50px;
 	font-size: 20px;
+	margin-top: 10px;
 	margin-bottom: 20px;
 	text-align: center;
 }

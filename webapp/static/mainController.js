@@ -37,6 +37,9 @@ cs194proj.controller('MainController', ['$scope', '$http', function($scope, $htt
     $scope.safariSelected = false;
 
     $scope.snippetMessage = "add snippets";
+    $scope.FAQMessage = "show FAQ";
+
+    $scope.registerDialogueVisible = false;
 
    $scope.listItems = [{
 	    action: '',
@@ -100,6 +103,12 @@ cs194proj.controller('MainController', ['$scope', '$http', function($scope, $htt
     $scope.generateMessage = 'generate script';
 
     $scope.show = false;
+
+    $scope.FAQChange = function() {
+      $scope.FAQShown = !$scope.FAQShown; 
+      if ($scope.FAQShown == false) $scope.FAQMessage = "show FAQ";
+      else $scope.FAQMessage = "hide FAQ";
+    }
 
   	$scope.add = function(listItem) {  
       if (listItem== undefined) {
