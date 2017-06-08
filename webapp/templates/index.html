@@ -36,19 +36,23 @@
 		</div>
 	    </form>
 	    {% else %}
-            <div class = "verticalCenter">
-                <form action="/login" method="post"> 
-                        <div class = "col-md-1"> 
-                            <input type="text" name ="username">
-                        </div>
-                        <div class = "col-md-1"> 
-                            <input type="text" name ="password">
-                        </div>
-                        <div class = "col-md-1"> 
-                            <input type="submit" value="login">
-                        </div>
-                    </div>
-                </form>
+            <div class="verticalCenter col-md-1 element">
+		<div class="button register-button">register</div>
+	    </div>
+	    <div class="verticalCenter col-md-1 element" >
+		<div class="button sign-up-button">sign up</div>
+                <!-- <form action="/login" method="post"> 
+                     <div class = "col-md-1"> 
+                     <input type="text" name ="username">
+                     </div>
+                     <div class = "col-md-1"> 
+                     <input type="text" name ="password">
+                     </div>
+                     <div class = "col-md-1"> 
+                     <input type="submit" value="login">
+                     </div>
+                     </div>
+                     </form> -->
             </div>
 	    {% endif %}
         </div>
@@ -269,7 +273,7 @@
         </div>
 
         <!-- BUTTON STUFF HERE -->
-        <div class = "row">
+        <div class = "row last-button-row">
             <div class = "col-md-2"></div>
             <div class = "col-md-2" ng-click="addAnotherRow()"> 
                 <div class = "button"> add another row </div> 

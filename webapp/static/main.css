@@ -74,6 +74,14 @@ a:hover, a:visited, a:link, a:active {
 	height: 100%;
 }
 
+.register-button {
+    color: #bef7e7;
+}
+
+.sign-up-button {
+    background-color: #bef7e7;
+}
+
 .addedRow {
 	background-color: #BEF7E7;
 	margin-top: 5px;
@@ -122,6 +130,10 @@ a:hover, a:visited, a:link, a:active {
 	display: inline-block;
 }
 
+.last-button-row {
+    margin-top: 20px;
+}
+
 .customized {
 	color: #495E58;
 	display: inline-block;
@@ -132,7 +144,6 @@ a:hover, a:visited, a:link, a:active {
 	height: 50px;
 	line-height: 50px;
 	font-size: 20px;
-	margin-top: 20px;
 	margin-bottom: 20px;
 	text-align: center;
 }
