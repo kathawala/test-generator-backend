@@ -16,10 +16,53 @@
 	-grey: 1C1C1C;
 */
 
+.animate-if {
+  background:white;
+  border:1px solid black;
+  padding:10px;
+}
+
+.animate-if.ng-enter, .animate-if.ng-leave {
+  transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+}
+
+.animate-if.ng-enter,
+.animate-if.ng-leave.ng-leave-active {
+  opacity:0;
+}
+
+.animate-if.ng-leave,
+.animate-if.ng-enter.ng-enter-active {
+  opacity:1;
+}
+
 * { 	
 	font-family: 'Quicksand', sans-serif;
 	font-size: 20px;
 	color: #1C1C1C;
+}
+
+.inline {
+	display: inline-block;
+	font-weight: bold;
+}
+
+.bottomLeft {
+	position: fixed;
+	left: 30px;
+	bottom: 20px;
+	background-color: #BEF7E7 !important;
+	z-index: 1000;
+	opacity: 80%;
+}
+
+.bottomLeft2 {
+	position: fixed;
+	left: 30px;
+	bottom: 20px;
+	background-color: #DE8368 !important;
+	z-index: 1000;
+	opacity: 80%;
 }
 
 .registerDialogue {
@@ -264,14 +307,6 @@ a:hover, a:visited, a:link, a:active {
 	text-align: center;
 }
 
-.snippetTitle {
-	height: 50px;
-	line-height: 50px;
-	font-size: 20px;
-	margin-bottom: 10px;
-	background-color: #50AB91;
-}
-
 .color{
 	background-color: #50AB91;
 }
@@ -294,6 +329,32 @@ a:hover, a:visited, a:link, a:active {
 	margin-top: 10px;
 	margin-bottom: 10px;
 	text-align: center;
+}
+
+.button3 {
+	background-color: #68DEBD;
+	height: 50px;
+	line-height: 50px;
+	font-size: 20px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	text-align: center;
+}
+
+.snippetTitle {
+	height: 40px !important;
+	line-height: 40px !important;
+	font-size: 20px;
+	margin-bottom: 10px;
+	background-color: #50AB91;
+}
+
+.snippetTitle2 {
+	height: 40px !important;
+	line-height: 40px !important;
+	font-size: 20px;
+	margin-bottom: 10px;
+	background-color: #50AB91;
 }
 
 .prompt {
