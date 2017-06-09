@@ -44,6 +44,7 @@ cs194proj.controller('MainController', ['$scope', '$http', '$timeout', function(
 
     $scope.snippetBeingNamed = true;
     $scope.registerDialogueVisible = false;
+    $scope.loginDialogueVisible = false;
 
    $scope.listItems = [{
 	    action: '',

@@ -59,7 +59,7 @@
 
 	    {% else %}
             <div class="verticalCenter col-md-2">
-                <div class="button">log in</div>
+                <div class="button" ng-click="loginDialogueVisible = !loginDialogueVisible">log in</div>
             </div>
             <div class = "verticalCenter col-md-2"> 
                 <div class="button" ng-click="registerDialogueVisible = !registerDialogueVisible">register</div>
@@ -78,6 +78,30 @@
              </form> -->
 	    {% endif %}
 
+        </div>
+
+        <div ng-if ="loginDialogueVisible == true" class = "registerDialogue"> 
+            <div class = "row">
+                <div class = "col-md-3"></div>
+                <div class = "col-md-1 registerRow">
+                    <div> username: </div>
+                </div>
+                <div class = "col-md-2">
+                    <div> <input class = "input form-control" type = "text"></input> </div>
+                </div>
+                <div class = "col-md-1 registerRow">
+                    <div> password: </div>
+                </div>
+                <div class = "col-md-2">
+                    <div> <input class = "input form-control" type = "text"></input> </div>
+                </div>
+            </div>
+            <div class = "row">
+                <div class = "col-md-4"></div>
+                <div class = "col-md-4">
+                    <div class = "button"> login </div>
+                </div>
+            </div>
         </div>
 
         <div ng-if="registerDialogueVisible == true" class = "registerDialogue"> 
