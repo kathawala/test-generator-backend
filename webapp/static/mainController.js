@@ -134,6 +134,7 @@ cs194proj.controller('MainController', ['$scope', '$http', '$timeout', function(
       else {
         console.log(listItem.URL);
 
+
         if (listItem.action == 'navigate to url') {
           listItem.selector = '';
           listItem.text = '';
@@ -147,7 +148,11 @@ cs194proj.controller('MainController', ['$scope', '$http', '$timeout', function(
           if (listItem.text == undefined) listItem.text = '';
         }
 
-        if ($scope.selectorList.length == 0 && listItem.action != 'navigate to url') {
+
+        if (listItem.action == undefined) {
+          $scope.warningMessage = 'You must select a value for the action!';
+        }
+        else if ($scope.selectorList.length == 0 && listItem.action != 'navigate to url') {
           $scope.warningMessage = 'You must navigate to a website before you can run any tests!';
         }
         else if (listItem.action == 'navigate to url' && (listItem.url == '' || listItem.url == undefined)) {
@@ -208,7 +213,11 @@ cs194proj.controller('MainController', ['$scope', '$http', '$timeout', function(
           if (snippetItem.text == undefined) snippetItem.text = '';
         }
 
-        if (snippetItem.action == 'navigate to url' && (snippetItem.url == '' || snippetItem.url == undefined)) {
+
+        if (snippetItem.action == undefined) {
+          $scope.warningMessage = 'You must select a value for the action!';
+        }
+        else if (snippetItem.action == 'navigate to url' && (snippetItem.url == '' || snippetItem.url == undefined)) {
           $scope.warningMessage2 = 'You must input a value for the URL!';
         }
         else if (snippetItem.action != 'navigate to url' && (snippetItem.selector == '' || snippetItem.selector == undefined)) {
