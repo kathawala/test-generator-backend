@@ -93,14 +93,13 @@ def load_user(session_token):
 
 @app.route('/login', methods=['POST'])
 def login():
-    error = None
     username = request.form['username']
     password = request.form['password']
     user = db.session.query(User).filter_by(username=username).first()
-    if check_password_hash(user.hashed_password, password):
+    if user and check_password_hash(user.hashed_password, password):
         login_user(user, remember=True)
     else:
-        error = "Wrong username/password"
+        flash("Wrong username/password")
 
     return redirect('/')
 
@@ -118,7 +117,6 @@ def logout():
 
 @app.route('/register', methods=['POST'])
 def register():
-    error = None
     username = request.form['username']
     password = request.form['password']
     confirmpassword = request.form['confirmpassword']
@@ -127,7 +125,7 @@ def register():
         db.session.add(user)
         db.session.commit()
     else:
-        error = "Password didn't match confirmation"
+        flash("Password didn't match confirmation")
     
     return redirect('/')
     

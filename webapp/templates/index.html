@@ -190,6 +190,10 @@
             </div>
         </div>
 
+	{% for message in get_flashed_messages() %}
+	<div class="alert bottomLeft2 animate-if">{{ message }}</div>
+	{% endfor %}
+	
         <div class = "createPrompt"> Create a script! </div>
 
         <div class = "row prompt"> 
