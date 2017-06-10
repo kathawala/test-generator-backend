@@ -46,6 +46,8 @@ cs194proj.controller('MainController', ['$scope', '$http', '$timeout', function(
     $scope.registerDialogueVisible = false;
     $scope.loginDialogueVisible = false;
 
+    $scope.showAlert2 = false;
+
    $scope.listItems = [{
 	    action: '',
 	    selector: '',
@@ -190,8 +192,15 @@ cs194proj.controller('MainController', ['$scope', '$http', '$timeout', function(
         $scope.snippetNamed = false;
         $scope.model.currentSnippetName = '';
 
-        document.getElementsByClassName('success-alert')[0].style.visibility = 'hidden';
+        $scope.showAlert2 = true;
 
+        setTimeout(function() {
+          $scope.showAlert2 = false;
+          $scope.$digest();
+        }, 2000);
+      }
+      else {
+        $scope.warningMessage2 = "You must define actions for your snippet!"
       }
     }
 

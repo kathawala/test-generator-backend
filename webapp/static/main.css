@@ -14,6 +14,10 @@
 	-darker action color: 6DA7A7
 
 	-grey: 1C1C1C;
+
+	A4DECE
+	84B2A6
+	89C7B6
 */
 
 .animate-if {
@@ -54,6 +58,8 @@
 	background-color: #BEF7E7 !important;
 	z-index: 1000;
 	opacity: 80%;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 
+	0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .bottomLeft2 {
@@ -63,6 +69,8 @@
 	background-color: #DE8368 !important;
 	z-index: 1000;
 	opacity: 80%;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 
+	0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .registerDialogue {
@@ -114,12 +122,14 @@ a:hover, a:visited, a:link, a:active {
 }
 
 .addButton {
-	background-color: #68DEBD;
+	background-color: #89C7B6;
 	text-align: center;
 	margin-top: 10px;
 	margin-bottom: 10px;
 	line-height: 50px;
 	height: 50px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 
+	0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .addButton2 {
@@ -129,11 +139,13 @@ a:hover, a:visited, a:link, a:active {
 	margin-bottom: 10px;
 	line-height: 50px;
 	height: 50px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 
+	0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .titleBar {
-	background-color: #68DEBD;
-	height: 100px;
+	background-color: #89C7B6;
+	height: 125px;
 	font-weight: bold;
 }
 
@@ -150,6 +162,8 @@ a:hover, a:visited, a:link, a:active {
 	background-color: #BEF7E7;
 	margin-top: 5px;
 	margin-bottom: 10px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 
+	0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .input {
@@ -207,6 +221,8 @@ a:hover, a:visited, a:link, a:active {
 	margin-top: 10px;
 	margin-bottom: 20px;
 	text-align: center;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 
+	0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .button2 {
@@ -217,6 +233,8 @@ a:hover, a:visited, a:link, a:active {
 	margin-top: 10px;
 	margin-bottom: 20px;
 	text-align: center;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 
+	0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .scroll {
@@ -231,13 +249,15 @@ a:hover, a:visited, a:link, a:active {
 }
 
 .subsetTitle {
-	background-color: #68DEBD;
+	background-color: #89C7B6;
 	height: 50px;
 	line-height: 50px;
 	margin-top: 5px;
 	margin-bottom: 5px;
 	font-size: 40px;
 	color: #495E58;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 
+	0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .add {
@@ -246,6 +266,8 @@ a:hover, a:visited, a:link, a:active {
 	line-height: 50px;
 	margin-top: 5px;
 	margin-bottom: 5px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 
+	0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .remove {
@@ -255,6 +277,8 @@ a:hover, a:visited, a:link, a:active {
 	margin-bottom: 5px;
 	font-size: 20px;
 	background-color: #DE8368;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 
+	0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .dismiss {
@@ -285,10 +309,12 @@ a:hover, a:visited, a:link, a:active {
 	font-size: 30px;
 	font-weight: bold;
 	margin-top: 10px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 
+	0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .adding {
-	background-color: #68DEBD;
+	background-color: #89C7B6;
 }
 
 .addSnippetDialogue {
@@ -304,8 +330,10 @@ a:hover, a:visited, a:link, a:active {
 	font-size: 20px;
 	margin-top: 10px;
 	margin-bottom: 10px;
-	background-color: #68DEBD;
+	background-color: #89C7B6;
 	text-align: center;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 
+	0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .color{
@@ -313,13 +341,15 @@ a:hover, a:visited, a:link, a:active {
 }
 
 .browser2 {
-	background-color: #68DEBD;
+	background-color: #89C7B6;
 	height: 50px;
 	line-height: 50px;
 	font-size: 20px;
 	margin-top: 10px;
 	margin-bottom: 10px;
 	text-align: center;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 
+	0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .browser {
@@ -330,16 +360,20 @@ a:hover, a:visited, a:link, a:active {
 	margin-top: 10px;
 	margin-bottom: 10px;
 	text-align: center;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 
+	0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .button3 {
-	background-color: #68DEBD;
+	background-color: #89C7B6;
 	height: 50px;
 	line-height: 50px;
 	font-size: 20px;
 	margin-top: 10px;
 	margin-bottom: 10px;
 	text-align: center;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 
+	0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .snippetTitle {

@@ -1,7 +1,6 @@
 <!doctype html>
 <html ng-app="cs194proj" ng-controller="MainController">
     <head>
-
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="static/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
         <script type="text/javascript" src="static/angular.js"></script>
@@ -40,12 +39,20 @@
 
         <div ng-if = "showAlert" class="alert bottomLeft animate-if" > 
             <strong> Success! </strong>
-            Snippet added to list. 
+            Snippet added to test. 
             <div ng-click = "showAlert = false" class = "inline">   &nbsp; x </div>
         </div>
 
+        <div ng-if = "showAlert2" class="alert bottomLeft animate-if" > 
+            <strong> Success! </strong>
+            Snippet added to snippet list. 
+            <div ng-click = "showAlert2 = false" class = "inline">   &nbsp; x </div>
+        </div>
+
         <div class = "titleBar row"> 
-            <div class = "col-md-3 element"> Arsenic Webdriver </div>
+            <div class = "col-md-3 element"> 
+                <img src="http://i1182.photobucket.com/albums/x453/ewellk/Arsenic_Webdriver_3_zpsd8ynaczz.png" style = "height: 125px; ">
+            </div>
             <div class = "col-md-3 space"></div> 
 
 	    {% if current_user.is_authenticated %}
@@ -333,19 +340,19 @@
                         <div class = "col-md-4 addSnippetDialogue">
                             What do you want to call this snippet? 
                         </div>
-                        <div class = "col-md-2 center"> 
-                            <input class = "input form-control" type = "text"  ng-model="model.currentSnippetName"/> 
+                        <div class = "col-md-2 addSnippetDialogue" style = "height: 100%; padding: 10px"> 
+                            <input class = "input form-control" type = "text"  ng-model="model.currentSnippetName"/>
                         </div>
                     </div>
 
                     <div ng-if = "snippetBeingNamed == false"> 
                         <div class = "col-md-2 addSnippetDialogue"></div>
-                        <div class = "col-md-4 addSnippetDialogue"> Snippet name: [[tempSnippet.name]] </div>
-                        <div class = "col-md-2"></div>
+                        <div class = "col-md-4 addSnippetDialogue"> <strong> Snippet name: </strong> [[tempSnippet.name]] </div>
+                        <div class = "col-md-2 addSnippetDialogue"></div>
                     </div>
 
                     <!-- <div class = "col-md-2" ng-click = "nameSnippet()">  -->
-                    <div class = "col-md-2" ng-click = "nameSnippet()">
+                    <div class = "col-md-2 addSnippetDialogue" ng-click = "nameSnippet()">
                         <div class = "nameSnippet"> [[snippetNameMessage]] </div> 
                     </div> 
                 </div> 
