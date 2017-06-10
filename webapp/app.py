@@ -84,7 +84,7 @@ class Snippet(db.Model):
         return '<Userid %r> | <Json %r>' % (self.userid, self.json_data)
 
 #####                   #####
-#####  Login Functions  #####
+#####  Auth Functions   #####
 #####                   #####
 
 @login_manager.user_loader
@@ -99,12 +99,10 @@ def login():
     user = db.session.query(User).filter_by(username=username).first()
     if check_password_hash(user.hashed_password, password):
         login_user(user, remember=True)
-        if request.referrer and is_safe_url(request.referrer):
-            return redirect(request.referrer)
     else:
         error = "Wrong username/password"
 
-    return render_template('index.html')
+    return redirect('/')
 
 # from flask snippets: http://flask.pocoo.org/snippets/62/
 def is_safe_url(url):
@@ -116,11 +114,24 @@ def is_safe_url(url):
 @login_required
 def logout():
     logout_user()
-    if request.referrer and is_safe_url(request.referrer):
-        return redirect(request.referrer)
-    else:
-        return render_template('index.html')
+    return redirect('/')
 
+@app.route('/register', methods=['POST'])
+def register():
+    error = None
+    username = request.form['username']
+    password = request.form['password']
+    confirmpassword = request.form['confirmpassword']
+    if password == confirmpassword:
+        user = User(username, password)
+        db.session.add(user)
+        db.session.commit()
+    else:
+        error = "Password didn't match confirmation"
+    
+    return redirect('/')
+    
+    
 #####                   #####
 ##### Routing Functions #####
 #####                   #####
