@@ -65,10 +65,10 @@
 	    </div>
 	    {% else %}
             <div class="verticalCenter col-md-2">
-                <div class="button" ng-click="loginDialogueVisible = !loginDialogueVisible">log in</div>
+                <div class="button" ng-click="loginDialogueVisible = !loginDialogueVisible; registerDialogueVisible = false">log in</div>
             </div>
             <div class = "verticalCenter col-md-2"> 
-                <div class="button" ng-click="registerDialogueVisible = !registerDialogueVisible">register</div>
+                <div class="button" ng-click="registerDialogueVisible = !registerDialogueVisible; loginDialogueVisible = false">register</div>
             </div> 
 	    {% endif %}
 
@@ -207,7 +207,7 @@
             <div class = "col-md-2"></div>
             <div class = "col-md-2 center2"> What browsers would you like to test on? </div>
             <div class = "col-md-2" ng-click = "firefoxSelected = !firefoxSelected">
-                <div ng-class = "{browser: firefoxSelected, browser2: !firefoxSelected}"> Firefox (default) </div> 
+                <div ng-class = "{browser: firefoxSelected, browser2: !firefoxSelected}"> Firefox </div> 
             </div>
             <div class = "col-md-2" ng-click = "chromeSelected = !chromeSelected"> 
                 <div ng-class = "{browser: chromeSelected, browser2: !chromeSelected}"> Chrome </div> 
@@ -222,7 +222,7 @@
             <div class = "col-md-2 center"> Screen sizes? </div>
 
             <div class = "col-md-2" ng-click = "maximizeSelected = !maximizeSelected">
-                <div ng-class = "{browser: maximizeSelected, browser2: !maximizeSelected}"> Max Screen Size (default) </div> 
+                <div ng-class = "{browser: maximizeSelected, browser2: !maximizeSelected}"> Max Screen Size </div> 
             </div>
             <div class = "col-md-2" ng-click = "mobileSizeSelected = !mobileSizeSelected"> 
                 <div ng-class = "{browser: mobileSizeSelected, browser2: !mobileSizeSelected}"> Mobile (414x736) </div> 
@@ -233,6 +233,37 @@
             <!-- <div class = "col-md-2 " ng-click = "customSizeSelected = !customSizeSelected"> 
                  <div ng-class = " {browser: customSizeSelected, browser2: !customSizeSelected}"> Custom </div>
 		 </div> -->
+        </div>
+
+        <div style = "height: 5px"></div>
+
+        <div class = "sizes">
+            <div class = "row">
+                <div class = "col-md-2"></div>
+                <div class = "col-md-2 center2"> Or define your own screen sizes: </div>
+                <div class = "col-md-2 center"> 
+                    <input class = "input form-control" type="text" placeholder = "enter width" ng-model="screenSize.width" />
+                </div> 
+                <div class = "col-md-2 center"> 
+                    <input class = "input form-control" type="text" placeholder = "enter height" ng-model="screenSize.height" />
+                </div>
+                 <div class = "col-md-2"> <div class = "addButton" ng-click="addScreenSize(screenSize); screenSize = null;">Add</div> </div>
+            </div>
+
+            <div ng-repeat="size in additionalSizes">
+                <div class = "row prompt">
+                    <div class = "col-md-4"></div>
+                    <div class = "col-md-2 size">
+                        <strong> Width: </strong> [[size.width]]
+                    </div>
+                    <div class = "col-md-2 size">
+                        <strong> Height: </strong> [[size.height]]
+                    </div>
+                    <div class = "col-md-1 remove" ng-click = "removeSize($index)"> Remove </div>
+                </div>
+            </div>
+
+            <div ng-if = "(additionalSizes.length != 0)" style = "height: 10px"></div>
         </div>
 
         <!-- <div ng-if = "customSizeSelected" class = "row prompt inverted">
@@ -254,6 +285,8 @@
             <div class = "col-md-2 center"> <input placeholder = "enter URL" class = "input form-control" type="text" ng-model="listItem.url"/></div>
             <div class = "col-md-2"> <div class = "addButton" ng-click="listItem.action = 'navigate to url'; add(listItem)">Add</div> </div>
         </div>
+
+        <div style = "height: 15px"></div>
 
         <div ng-repeat="item in selectorList" data-drop="true" data-drag="true" ng-model="selectorList" jqyoui-droppable="{index: [[$index]], onDrop:'dropCallback',}" jqyoui-draggable="{index: [[$index]], insertInline: true, direction:'jqyouiDirection',animate: true, onStart: 'startCallback'}" data-jqyoui-options="{revert: 'invalid'}" data-direction="[[item.jqyouiDirection]]">
             <div class = "row">
@@ -451,6 +484,8 @@
             </div>
         </div>
 
+        <div style = "height: 10px" ng-if = "selectorList.length == 0"></div>
+        <div style = "height: 20px" ng-if = "selectorList.length != 0"></div>
         <!-- BUTTON STUFF HERE -->
         <div class = "row last-button-row">
             <div class = "col-md-2"></div>
@@ -460,7 +495,7 @@
             <div class = "col-md-2" ng-click="generate(); changeName()"> 
                 <div class = "button"> [[generateMessage]] </div> 
             </div>
-            <div class = "col-md-2" ng-click="clear()"> 
+            <div class = "col-md-2" ng-click="clear(); screenSize = null"> 
                 <div class = "button"> start over </div> 
             </div>
             <div class = "col-md-2" ng-click="savedRows()"> 

@@ -131,8 +131,6 @@ cs194proj.controller('MainController', ['$scope', '$http', '$timeout', function(
           $scope.showAlert = false;
           $scope.$digest();
       }, 2000);
-
-      
     }
 
     $scope.FAQChange = function() {
@@ -275,6 +273,36 @@ cs194proj.controller('MainController', ['$scope', '$http', '$timeout', function(
       }
     }
 
+  $scope.additionalSizes = [];
+
+  $scope.removeSize = function(index) {
+    $scope.additionalSizes.splice(index, 1);
+  }
+
+  $scope.isNumeric = function(string) {
+    return /^\d+$/.test(string);
+  }
+
+  $scope.addScreenSize = function(screenSize) {
+    if (screenSize == undefined) {
+      $scope.warningMessage = "you must enter values for height and width!";
+    }
+    else if (screenSize.height == undefined || screenSize.width == undefined) {
+      $scope.warningMessage = "you must enter values for height and width!";
+    }
+    else if ($scope.isNumeric(screenSize.height) == false || $scope.isNumeric(screenSize.width) == false ) {
+      $scope.warningMessage = "the values for height and width must be numeric!";
+    }
+    else {
+      var copy = angular.copy(screenSize);
+      copy.height = +copy.height;
+      copy.width = +copy.width;
+      $scope.additionalSizes.push(copy);
+      console.log($scope.additionalSizes);
+      $scope.warningMessage = '';
+    }
+  }
+
   $scope.generate = function() {
     if ($scope.selectorList.length == 0) {
       $scope.warningMessage = 'Your script will be empty!';
@@ -329,6 +357,13 @@ cs194proj.controller('MainController', ['$scope', '$http', '$timeout', function(
       };
       JSONObj.screen_sizes.push(resolution);
     }
+
+    if ($scope.additionalSizes.length != 0) {
+      for (var i = 0; i< $scope.additionalSizes.length; i++) {
+        var copy = angular.copy($scope.additionalSizes[i]);
+        JSONObj.screen_sizes.push(copy);
+      }
+    }
       
     if (JSONObj.browser_types.length == 0) JSONObj.browser_types.push("Firefox");
 
@@ -356,6 +391,15 @@ cs194proj.controller('MainController', ['$scope', '$http', '$timeout', function(
       $scope.showScript = false;
       $scope.selectorList = [];
       $scope.generateMessage = 'generate script';
+      $scope.additionalSizes = [];
+
+      $scope.firefoxSelected = true;
+      $scope.chromeSelected = false;
+      $scope.safariSelected = false;
+      
+      $scope.maximizeSelected = true;
+      $scope.mobileSizeSelected = false;
+      $scope.tabletSizeSelected = false;
     }
 
     $scope.savedRows = function() {

@@ -51,6 +51,18 @@
 	font-weight: bold;
 }
 
+.sizes {
+	background-color: #BEF7E7;
+}
+
+.size {
+	background-color: #89C7B6;
+	margin-bottom: 5px;
+	margin-top: 5px;
+	height: 50px;
+	line-height: 50px;
+}
+
 .bottomLeft {
 	position: fixed;
 	left: 30px;
