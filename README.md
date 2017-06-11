@@ -79,7 +79,17 @@ A valid JSON request will be styled as follows
   		   "Firefox",
 		   "Safari",
 		   "Chrome"
-  ]
+  ],
+  "screen_sizes": [
+  		  {
+			"width": 720,
+			"height": 480
+		  },
+		  {
+			"width": 1920,
+			"height": 1080
+		  }
+  ],
   "actions": [
   	   // actions go in this array
   ]
@@ -137,6 +147,15 @@ of execution of the generated program.
     "action": "navigate to url",
     "url": "https://www.poetryfoundation.org/"
 }
+```
+
+#### `wait`
+```Javascript
+{
+    "action": "wait",
+    "seconds": 5
+}
+
 ```
 ### Full Example
 
