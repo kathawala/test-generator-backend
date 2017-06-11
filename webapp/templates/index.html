@@ -301,6 +301,10 @@
                         <div class = "label1"> URL: </div>
                         <div class = "customized"> [[item.url]] </div>
                     </div>
+                    <div class = "col-md-4 secondary" ng-show = "item.action == 'wait'"> 
+                        <div class = "label1"> Wait time: </div>
+                        <div class = "customized"> [[item.seconds]] </div>
+                    </div>
                     <div class = "col-md-1"></div>
                     <div class = "col-md-4 secondary" ng-show = "item.text != undefined && item.text != ''"> 
                         <div class = "label1"> Text: </div>
@@ -322,7 +326,7 @@
               <option value="does not exist">check if doesn't exist</option>
               <option value="click">click on</option>
               <option value="enter text">enter text in box</option>
-	      <option value="wait">wait</option>
+	          <option value="wait">wait</option>
             </select>
             </div>
 
@@ -345,11 +349,11 @@
                     <input class = "input form-control" type="text" placeholder = "enter URL" ng-model="listItem.url" />
                 </div>
             </div>
-	    <div ng-show="listItem.action == 'wait'">
-		<div class="col-md-4 center">
-		    <input class="input form-control" type="text" placeholder="time in seconds (5, 0.1, etc)" ng-model="listItem.seconds" />
-		</div>
-	    </div>
+    	    <div ng-show="listItem.action == 'wait'">
+        		<div class="col-md-4 center">
+        		    <input class="input form-control" type="text" placeholder="time in seconds (5, 0.1, etc)" ng-model="listItem.seconds" />
+        		</div>
+    	    </div>
             <div class = "col-md-2"> <div class = "addButton" ng-click="add(listItem)">Add</div> </div>
             <div class = "col-md-2"></div> 
         </div>
@@ -379,6 +383,10 @@
                                 <div class = "label1"> URL: </div>
                                 <div class = "customized"> [[jsonObject.url]] </div>
                             </div>
+                            <div class = "col-md-4" ng-show = "jsonObject.action == 'wait'"> 
+                                <div class = "label1"> Wait time: </div>
+                                <div class = "customized"> [[jsonObject.seconds]] </div>
+                            </div>
                             <div class = "col-md-1"></div>
                             <div class = "col-md-4" ng-show = "jsonObject.text != '' && jsonObject.text != undefined"> 
                                 <div class = "label1"> Text: </div>
@@ -391,7 +399,7 @@
 
             <div class = "row">
                 <div class = "col-md-2"></div>  
-                <div class = "col-md-8 addSnippetButton" ng-click = "addSnippetViewable = !addSnippetViewable"> add another snippet to your list </div>  
+                <div class = "col-md-8 addSnippetButton" ng-click = "getSnippetsFromDB(); addSnippetViewable = !addSnippetViewable"> add another snippet to your list </div>  
             </div>
 
             <!-- SNIPPET STUFF HERE -->
@@ -435,6 +443,10 @@
                                     <div class = "label1"> URL: </div>
                                     <div class = "customized"> [[snippet.url]] </div>
                                 </div>
+                                <div class = "col-md-4 secondary" ng-show = "snippet.action == 'wait'"> 
+                                    <div class = "label1"> Wait time: </div>
+                                    <div class = "customized"> [[snippet.seconds]] </div>
+                                </div>
                                 <div class = "col-md-1"></div>
                                 <div class = "col-md-4 secondary" ng-show = "snippet.text != ''"> 
                                     <div class = "label1"> Text: </div>
@@ -457,7 +469,7 @@
                           <option value="does not exist">check if doesn't exist</option>
                           <option value="click">click on</option>
                           <option value="enter text">enter text in box</option>
-			  <option value="wait">wait</option>
+			              <option value="wait">wait</option>
                         </select>
                         </div>
 
@@ -479,11 +491,11 @@
                                 <input class = "input form-control" type="text" placeholder = "enter URL" ng-model="snippetItem.url" />
                             </div>
                         </div>
-			<div ng-show="listItem.action == 'wait'">
-			    <div class="col-md-4 center">
-				<input class="input form-control" type="text" placeholder="time in seconds (5, 0.1, etc)" ng-model="snippetItem.seconds" />
-			    </div>
-			</div>
+            			<div ng-show="snippetItem.action == 'wait'">
+            			    <div class="col-md-4 center">
+            				    <input class="input form-control" type="text" placeholder="time in seconds (5, 0.1, etc)" ng-model="snippetItem.seconds" />
+            			    </div>
+            			</div>
                         <div class = "col-md-2"> <div class = "addButton2" ng-click="addToSnippet(snippetItem)"> Add </div> </div>
                     </div>
 
@@ -510,9 +522,15 @@
             <div class = "col-md-2" ng-click="clear(); screenSize = null"> 
                 <div class = "button"> start over </div> 
             </div>
+            {% if current_user.is_authenticated %}
+            <div class = "col-md-2" ng-click="getSnippetsFromDB(); savedRows()"> 
+                <div class = "button"> [[snippetMessage]] </div> 
+            </div>
+            {% else %}
             <div class = "col-md-2" ng-click="savedRows()"> 
                 <div class = "button"> [[snippetMessage]] </div> 
             </div>
+            {% endif %}
         </div>
 
         <div ng-show = "showScript"> 
