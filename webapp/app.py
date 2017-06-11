@@ -5,10 +5,10 @@ from urllib.parse import urlparse, urljoin
 
 from generateScript import generateScript
 
-from flask import Flask, request, make_response, session, g, redirect, url_for, abort, render_template, flash
+from flask import Flask, request, make_response, session, g, redirect, url_for, abort, render_template, flash, jsonify
 from sqlite3 import dbapi2 as sqlite3
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import login_required, LoginManager, login_user, logout_user
+from flask_login import login_required, LoginManager, login_user, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
@@ -152,16 +152,25 @@ def generate():
     script = generateScript(data)
     return script
 
-@app.route('/snippet', methods=['GET','POST'])
+@app.route('/snippets', methods=['GET','POST'])
 @login_required
 def snippet_handling():
+    userid = current_user.id
     if request.method == 'GET':
-        pass
+        snippets = db.session.query(Snippet).filter_by(userid=userid)
+        jsonArrayOfSnippets = []
+        for s in snippets:
+            jsonArrayOfSnippets.append(s.json_data)
+        return jsonify(jsonArrayOfSnippets)
     elif request.method == 'POST':
-        pass
+        data = request.get_json()
+        new_snippet = Snippet(userid, json.dumps(data))
+        db.session.add(new_snippet)
+        db.session.commit()
     else:
         pass
-
+    return redirect('/')
+        
 #####                        #####
 ##### Command Line Functions #####
 #####                        #####

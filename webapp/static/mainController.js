@@ -197,7 +197,10 @@ cs194proj.controller('MainController', ['$scope', '$http', '$timeout', function(
     $scope.addToSnippetList = function() {
       if ($scope.snippetInProgress.length != 0) {
         $scope.tempSnippet.values = angular.copy($scope.snippetInProgress);
-        $scope.savedRowsArray.push(angular.copy($scope.tempSnippet));
+
+	$http.post('/snippets', JSON.stringify($scope.tempSnippet));
+	
+        // $scope.savedRowsArray.push(angular.copy($scope.tempSnippet));
         $scope.tempSnippet = {};
         $scope.snippetInProgress = [];
         $scope.addSnippetViewable = false;
@@ -234,6 +237,11 @@ cs194proj.controller('MainController', ['$scope', '$http', '$timeout', function(
           snippetItem.url = '';
           if (snippetItem.text == undefined) snippetItem.text = '';
         }
+	if (snippetItem.action == 'wait') {
+	  snippetItem.url = '';
+	  snippetItem.selector = '';
+	  snippetItem.text = '';
+	}
 
 
         if (snippetItem.action == undefined) {
@@ -248,6 +256,9 @@ cs194proj.controller('MainController', ['$scope', '$http', '$timeout', function(
         else if (snippetItem.action == 'enter text' && (snippetItem.text == '' || snippetItem.text == undefined)) {
           $scope.warningMessage2 = 'You must input a value for the text!';
         }
+	else if (snippetItem.action == 'wait' && (snippetItem.seconds == '' || snippetItem.seconds == undefined)) {
+	  $scope.warningMessage2 = 'You must input a value for the wait time in seconds!';
+	}
         else {
           $scope.snippetInProgress.push(angular.copy(snippetItem));
           $scope.warningMessage2 = '';
@@ -256,6 +267,7 @@ cs194proj.controller('MainController', ['$scope', '$http', '$timeout', function(
           snippetItem.selector = '';
           snippetItem.url = '';
           snippetItem.text = '';
+	  snippetItem.seconds = '';
         }
       }
     }

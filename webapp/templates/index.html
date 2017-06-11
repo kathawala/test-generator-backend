@@ -461,7 +461,7 @@
                         </select>
                         </div>
 
-                        <div ng-show = "snippetItem.action != 'navigate to url' && snippetItem.action != 'enter text' ">
+                        <div ng-show = "snippetItem.action != 'navigate to url' && snippetItem.action != 'wait' && snippetItem.action != 'enter text' ">
                             <div class = "col-md-4 center"> 
                                 <input class = "input form-control" type="text" placeholder = "enter selector" ng-model="snippetItem.selector" />
                             </div> 
@@ -479,6 +479,11 @@
                                 <input class = "input form-control" type="text" placeholder = "enter URL" ng-model="snippetItem.url" />
                             </div>
                         </div>
+			<div ng-show="listItem.action == 'wait'">
+			    <div class="col-md-4 center">
+				<input class="input form-control" type="text" placeholder="time in seconds (5, 0.1, etc)" ng-model="snippetItem.seconds" />
+			    </div>
+			</div>
                         <div class = "col-md-2"> <div class = "addButton2" ng-click="addToSnippet(snippetItem)"> Add </div> </div>
                     </div>
 
