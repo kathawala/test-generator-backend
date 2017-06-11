@@ -57,13 +57,12 @@
 
 	    {% if current_user.is_authenticated %}
             <div class = "col-md-1 space"></div> 
-            <div class = "col-md-2 element">Hi {{ current_user.username }}!</div>
-            <form action="/logout" method="get">
-            <div class="col-md-1">
-                <input type="submit form-control" value="logout"></input>
-            </div>
-            </form>
-
+            <div class = "col-md-2 element" style="text-align: center;">Hi {{ current_user.username }}!</div>
+	    <div class="verticalCenter col-md-1">
+		<a href="/logout">
+		    <div class="button">logout</div>
+		</a>
+	    </div>
 	    {% else %}
             <div class="verticalCenter col-md-2">
                 <div class="button" ng-click="loginDialogueVisible = !loginDialogueVisible">log in</div>
@@ -71,74 +70,66 @@
             <div class = "verticalCenter col-md-2"> 
                 <div class="button" ng-click="registerDialogueVisible = !registerDialogueVisible">register</div>
             </div> 
-            <!-- <form action="/login" method="post"> 
-             <div class = "col-md-1"> 
-             <input type="text" name ="username">
-             </div>
-             <div class = "col-md-1"> 
-             <input type="text" name ="password">
-             </div>
-             <div class = "col-md-1"> 
-             <input type="submit" value="login">
-             </div>
-             </div>
-             </form> -->
 	    {% endif %}
 
         </div>
 
         <div ng-if ="loginDialogueVisible == true" class = "registerDialogue"> 
-            <div class = "row">
-                <div class = "col-md-3"></div>
-                <div class = "col-md-1 registerRow">
-                    <div> username: </div>
-                </div>
-                <div class = "col-md-2">
-                    <div> <input class = "input form-control" type = "text"></input> </div>
-                </div>
-                <div class = "col-md-1 registerRow">
-                    <div> password: </div>
-                </div>
-                <div class = "col-md-2">
-                    <div> <input class = "input form-control" type = "text"></input> </div>
-                </div>
-            </div>
-            <div class = "row">
-                <div class = "col-md-4"></div>
-                <div class = "col-md-4">
-                    <div class = "button"> login </div>
-                </div>
-            </div>
+	    <form action="/login" method="post" id="loginForm">
+		<div class = "row">
+                    <div class = "col-md-3"></div>
+                    <div class = "col-md-1 registerRow">
+			<div> username: </div>
+                    </div>
+                    <div class = "col-md-2">
+			<div> <input class = "input form-control" type = "text" name="username"></input> </div>
+                    </div>
+                    <div class = "col-md-1 registerRow">
+			<div> password: </div>
+                    </div>
+                    <div class = "col-md-2">
+			<div> <input class = "input form-control" type = "password" name="password"></input> </div>
+                    </div>
+		</div>
+		<div class = "row">
+                    <div class = "col-md-4"></div>
+                    <div class = "col-md-4">
+			<div class = "button" type="submit" onClick="javascript:document.getElementById('loginForm').submit();"> login </div>
+                    </div>
+		</div>
+	    </form>
         </div>
 
         <div ng-if="registerDialogueVisible == true" class = "registerDialogue"> 
-            <div class = "row">
-                <div class = "col-md-1"></div>
-                <div class = "col-md-1 registerRow">
-                    <div> username: </div>
-                </div>
-                <div class = "col-md-2">
-                    <div> <input class = "input form-control" type = "text"></input> </div>
-                </div>
-                <div class = "col-md-1 registerRow">
-                    <div> password: </div>
-                </div>
-                <div class = "col-md-2">
-                    <div> <input class = "input form-control" type = "text"></input> </div>
-                </div>
-                <div class = "col-md-2 registerRow">
-                    <div> repeat password: </div>
-                </div>
-                <div class = "col-md-2">
-                    <div> <input class = "input form-control" type = "text"></input> </div>
-                </div>
-            </div>
-            <div class = "row">
-                <div class = "col-md-4"></div>
-                <div class = "col-md-4">
-                    <div class = "button"> create account </div>
-                </div>
-            </div>
+	    <form action="/register" method="post" id="registerForm">
+		<div class = "row">
+                    <div class = "col-md-1"></div>
+                    <div class = "col-md-1 registerRow">
+			<div> username: </div>
+                    </div>
+                    <div class = "col-md-2">
+			<div> <input class = "input form-control" type = "text" name="username"></input> </div>
+                    </div>
+                    <div class = "col-md-1 registerRow">
+			<div> password: </div>
+                    </div>
+                    <div class = "col-md-2">
+			<div> <input class = "input form-control" type = "password" name="password"></input> </div>
+                    </div>
+                    <div class = "col-md-2 registerRow">
+			<div> repeat password: </div>
+                    </div>
+                    <div class = "col-md-2">
+			<div> <input class = "input form-control" type = "password" name="confirmpassword"></input> </div>
+                    </div>
+		</div>
+		<div class = "row">
+                    <div class = "col-md-4"></div>
+                    <div class = "col-md-4">
+			<div class = "button" type="submit" onClick="javascript:document.getElementById('registerForm').submit();"> create account </div>
+                    </div>
+		</div>
+	    </form>
         </div>
 
         <div ng-if = "FAQShown" class = "FAQ">
@@ -201,19 +192,22 @@
 
         <div class = "row FAQ">
             <div class = "col-md-4"> </div>
-            <div class = "col-md-4">
+            <div class = "col-md-4" style="margin-top: 10px;">
                 <div class = "button" ng-click = "FAQChange();"> [[FAQMessage]] </div> 
             </div>
         </div>
 
+	{% for message in get_flashed_messages() %}
+	<div id="flashed" class="alert bottomLeft2 animate-if" onClick="javascript:document.getElementById('flashed').setAttribute('style', 'display: none');">{{ message }}</div>
+	{% endfor %}
+	
         <div class = "createPrompt"> Create a script! </div>
 
         <div class = "row prompt"> 
             <div class = "col-md-2"></div>
             <div class = "col-md-2 center2"> What browsers would you like to test on? </div>
-
             <div class = "col-md-2" ng-click = "firefoxSelected = !firefoxSelected">
-                <div ng-class = "{browser: firefoxSelected, browser2: !firefoxSelected}"> Firefox </div> 
+                <div ng-class = "{browser: firefoxSelected, browser2: !firefoxSelected}"> Firefox (default) </div> 
             </div>
             <div class = "col-md-2" ng-click = "chromeSelected = !chromeSelected"> 
                 <div ng-class = "{browser: chromeSelected, browser2: !chromeSelected}"> Chrome </div> 
@@ -223,10 +217,40 @@
             </div>
         </div>
 
+        <div class = "row prompt"> 
+            <div class = "col-md-2"></div>
+            <div class = "col-md-2 center"> Screen sizes? </div>
+
+            <div class = "col-md-2" ng-click = "maximizeSelected = !maximizeSelected">
+                <div ng-class = "{browser: maximizeSelected, browser2: !maximizeSelected}"> Max Screen Size (default) </div> 
+            </div>
+            <div class = "col-md-2" ng-click = "mobileSizeSelected = !mobileSizeSelected"> 
+                <div ng-class = "{browser: mobileSizeSelected, browser2: !mobileSizeSelected}"> Mobile (414x736) </div> 
+            </div>
+            <div class = "col-md-2 " ng-click = "tabletSizeSelected = !tabletSizeSelected"> 
+                <div ng-class = " {browser: tabletSizeSelected, browser2: !tabletSizeSelected}"> Tablet (768x1024) </div>
+            </div>
+            <!-- <div class = "col-md-2 " ng-click = "customSizeSelected = !customSizeSelected"> 
+                 <div ng-class = " {browser: customSizeSelected, browser2: !customSizeSelected}"> Custom </div>
+		 </div> -->
+        </div>
+
+        <!-- <div ng-if = "customSizeSelected" class = "row prompt inverted">
+	     <div class ="col-md-6"></div>
+	     <div class="col-md-1 center">
+	     <input type="text" placeholder="width"></input>
+	     </div>
+	     <div class="col-md-1 center">
+	     <input type="text" placeholder="height"></input>
+	     </div>
+	     <div class="col-md-1 browser">Save</div>
+	     </div> -->
+	
         <!-- need to set listItem.action = "navigate to url" -->
         <div ng-if = "selectorList.length == 0" class = "form-group row prompt"> 
-            <div class = "col-md-2"></div>
+	    <div class = "col-md-2"></div>
             <div class = "col-md-4 center"> What website would you like to test? </div>
+	    
             <div class = "col-md-2 center"> <input placeholder = "enter URL" class = "input form-control" type="text" ng-model="listItem.url"/></div>
             <div class = "col-md-2"> <div class = "addButton" ng-click="listItem.action = 'navigate to url'; add(listItem)">Add</div> </div>
         </div>
@@ -238,7 +262,7 @@
                     <div class = "col-md-3 action"> [[item.action]] </div>
                     <div class = "col-md-4 secondary" ng-show = "item.selector != ''"> 
                         <div class = "label1"> Selector: </div>
-                        <div class = "customized"> [[item.selector]] </div>
+                        <div class = "customized"> [[item.selector | limitTo: 20]][[item.selector.length > 20 ? '...' : '']] </div>
                     </div>
                     <div class = "col-md-4 secondary" ng-show = "item.url != ''"> 
                         <div class = "label1"> URL: </div>
@@ -247,7 +271,7 @@
                     <div class = "col-md-1"></div>
                     <div class = "col-md-4 secondary" ng-show = "item.text != undefined && item.text != ''"> 
                         <div class = "label1"> Text: </div>
-                        <div class = "customized"> [[item.text]] </div>
+                        <div class = "customized"> [[item.text | limitTo: 20]][[item.text.length > 20 ? '...' : '']] </div>
                     </div>
                 </div>
                 <div class = "col-md-1 remove" ng-click = "remove($index)"> Remove </div>

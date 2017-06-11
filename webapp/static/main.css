@@ -61,6 +61,11 @@
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 
 	0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+.bottomLeft {
+        background-color: #def7f1 !important;
+	opacity: 40%;
+	cursor: pointer;	
+}
 
 .bottomLeft2 {
 	position: fixed;
@@ -71,6 +76,11 @@
 	opacity: 80%;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 
 	0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.bottomLeft2:hover {
+        background-color: #de9789 !important;
+	opacity: 40%;
+	cursor: pointer;
 }
 
 .registerDialogue {
@@ -218,7 +228,6 @@ a:hover, a:visited, a:link, a:active {
 	height: 50px;
 	line-height: 50px;
 	font-size: 20px;
-	margin-top: 10px;
 	margin-bottom: 20px;
 	text-align: center;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 
