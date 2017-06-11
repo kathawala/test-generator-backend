@@ -36,6 +36,17 @@ cs194proj.controller('MainController', ['$scope', '$http', '$timeout', function(
     $scope.chromeSelected = false;
     $scope.safariSelected = false;
 
+    $scope.maximizeSelected = true;
+    // $scope.customSizeSelected = false;
+    // $scope.customWidth = 0;
+    // $scope.customHeight = 0;
+    $scope.mobileSizeSelected = false;
+    $scope.mobileWidth = 414;
+    $scope.mobileHeight = 736;
+    $scope.tabletSizeSelected = false;
+    $scope.tabletWidth = 768;  
+    $scope.tabletHeight = 1024;
+  
     $scope.snippetMessage = "add snippets";
     $scope.snippetNameMessage = "name snippet"
     $scope.FAQMessage = "show FAQ";
@@ -269,6 +280,7 @@ cs194proj.controller('MainController', ['$scope', '$http', '$timeout', function(
 
     var JSONObj = {
       "browser_types": [],
+      "screen_sizes": [],
       "actions": actions
     }  
 
@@ -285,6 +297,30 @@ cs194proj.controller('MainController', ['$scope', '$http', '$timeout', function(
       console.log("safari");
     }
 
+    if ($scope.maximizeSelected == true){
+      var resolution = {
+	width: 0,
+	height: 0
+      };
+      JSONObj.screen_sizes.push(resolution);
+    }
+
+    if ($scope.mobileSizeSelected == true){
+      var resolution = {
+	width: $scope.mobileWidth,
+	height: $scope.mobileHeight
+      };
+      JSONObj.screen_sizes.push(resolution);
+    }
+
+    if ($scope.tabletSizeSelected == true){
+      var resolution = {
+	width: $scope.tabletWidth,
+	height: $scope.tabletHeight
+      };
+      JSONObj.screen_sizes.push(resolution);
+    }
+      
     if (JSONObj.browser_types.length == 0) JSONObj.browser_types.push("Firefox");
 
     console.log(JSONObj);

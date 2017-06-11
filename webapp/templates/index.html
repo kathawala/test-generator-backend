@@ -199,9 +199,8 @@
         <div class = "row prompt"> 
             <div class = "col-md-2"></div>
             <div class = "col-md-2 center2"> What browsers would you like to test on? </div>
-
             <div class = "col-md-2" ng-click = "firefoxSelected = !firefoxSelected">
-                <div ng-class = "{browser: firefoxSelected, browser2: !firefoxSelected}"> Firefox </div> 
+                <div ng-class = "{browser: firefoxSelected, browser2: !firefoxSelected}"> Firefox (default) </div> 
             </div>
             <div class = "col-md-2" ng-click = "chromeSelected = !chromeSelected"> 
                 <div ng-class = "{browser: chromeSelected, browser2: !chromeSelected}"> Chrome </div> 
@@ -211,10 +210,40 @@
             </div>
         </div>
 
+        <div class = "row prompt"> 
+            <div class = "col-md-2"></div>
+            <div class = "col-md-2 center"> Screen sizes? </div>
+
+            <div class = "col-md-2" ng-click = "maximizeSelected = !maximizeSelected">
+                <div ng-class = "{browser: maximizeSelected, browser2: !maximizeSelected}"> Max Screen Size (default) </div> 
+            </div>
+            <div class = "col-md-2" ng-click = "mobileSizeSelected = !mobileSizeSelected"> 
+                <div ng-class = "{browser: mobileSizeSelected, browser2: !mobileSizeSelected}"> Mobile (414x736) </div> 
+            </div>
+            <div class = "col-md-2 " ng-click = "tabletSizeSelected = !tabletSizeSelected"> 
+                <div ng-class = " {browser: tabletSizeSelected, browser2: !tabletSizeSelected}"> Tablet (768x1024) </div>
+            </div>
+            <!-- <div class = "col-md-2 " ng-click = "customSizeSelected = !customSizeSelected"> 
+                 <div ng-class = " {browser: customSizeSelected, browser2: !customSizeSelected}"> Custom </div>
+		 </div> -->
+        </div>
+
+        <!-- <div ng-if = "customSizeSelected" class = "row prompt inverted">
+	     <div class ="col-md-6"></div>
+	     <div class="col-md-1 center">
+	     <input type="text" placeholder="width"></input>
+	     </div>
+	     <div class="col-md-1 center">
+	     <input type="text" placeholder="height"></input>
+	     </div>
+	     <div class="col-md-1 browser">Save</div>
+	     </div> -->
+	
         <!-- need to set listItem.action = "navigate to url" -->
         <div ng-if = "selectorList.length == 0" class = "form-group row prompt"> 
-            <div class = "col-md-2"></div>
+	    <div class = "col-md-2"></div>
             <div class = "col-md-4 center"> What website would you like to test? </div>
+	    
             <div class = "col-md-2 center"> <input placeholder = "enter URL" class = "input form-control" type="text" ng-model="listItem.url"/></div>
             <div class = "col-md-2"> <div class = "addButton" ng-click="listItem.action = 'navigate to url'; add(listItem)">Add</div> </div>
         </div>
@@ -226,7 +255,7 @@
                     <div class = "col-md-3 action"> [[item.action]] </div>
                     <div class = "col-md-4 secondary" ng-show = "item.selector != ''"> 
                         <div class = "label1"> Selector: </div>
-                        <div class = "customized"> [[item.selector]] </div>
+                        <div class = "customized"> [[item.selector | limitTo: 20]][[item.selector.length > 20 ? '...' : '']] </div>
                     </div>
                     <div class = "col-md-4 secondary" ng-show = "item.url != ''"> 
                         <div class = "label1"> URL: </div>
@@ -235,7 +264,7 @@
                     <div class = "col-md-1"></div>
                     <div class = "col-md-4 secondary" ng-show = "item.text != undefined && item.text != ''"> 
                         <div class = "label1"> Text: </div>
-                        <div class = "customized"> [[item.text]] </div>
+                        <div class = "customized"> [[item.text | limitTo: 20]][[item.text.length > 20 ? '...' : '']] </div>
                     </div>
                 </div>
                 <div class = "col-md-1 remove" ng-click = "remove($index)"> Remove </div>

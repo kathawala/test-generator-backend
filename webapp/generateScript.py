@@ -45,6 +45,18 @@ driver = webdriver.{0}()
 browser = Browser(driver)
 """
     return browser_init.format(browser_type)
+
+def setScreenSize(width, height):
+    screen_size_setting = """
+driver.set_window_size({0}, {1})
+"""
+    maximize_setting = """
+driver.maximize_window()
+"""
+    if width == 0 and height == 0:
+        return maximize_setting
+    else:
+        return screen_size_setting.format(width, height)
     
 def handleClick(selector):
 
@@ -106,10 +118,14 @@ def generateScript(data):
     timeline = data['actions']
     output = ""
     for browser_type in data['browser_types']:
-        output = output + setBrowser(browser_type)
-        for event in timeline:
-            output = output + processEvent(event)
-        output = output + "driver.quit()\n"
+        for resolution in data['screen_sizes']:
+            width = resolution['width']
+            height = resolution['height']
+            output = output + setBrowser(browser_type)
+            output = output + setScreenSize(width, height)
+            for event in timeline:
+                output = output + processEvent(event)
+            output = output + "driver.quit()\n"
 
     return(script_boilerplate + output)
 
