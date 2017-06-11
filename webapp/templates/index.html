@@ -322,11 +322,12 @@
               <option value="does not exist">check if doesn't exist</option>
               <option value="click">click on</option>
               <option value="enter text">enter text in box</option>
+	      <option value="wait">wait</option>
             </select>
             </div>
 
             <!-- EDIT HERE!! -->
-            <div ng-show = "listItem.action != 'navigate to url' && listItem.action != 'enter text' ">
+            <div ng-show = "listItem.action != 'navigate to url' && listItem.action != 'enter text' && listItem.action != 'wait' ">
                 <div class = "col-md-4 center"> 
                     <input class = "input form-control" type="text" placeholder = "enter selector" ng-model="listItem.selector" /> 
                 </div> 
@@ -341,9 +342,14 @@
             </div>
             <div ng-show = "listItem.action == 'navigate to url'">
                 <div class = "col-md-4 center"> 
-                    <input class = "input form-control" type="text" placeholder = "enter url" ng-model="listItem.url" />
+                    <input class = "input form-control" type="text" placeholder = "enter URL" ng-model="listItem.url" />
                 </div>
             </div>
+	    <div ng-show="listItem.action == 'wait'">
+		<div class="col-md-4 center">
+		    <input class="input form-control" type="text" placeholder="time in seconds (5, 0.1, etc)" ng-model="listItem.seconds" />
+		</div>
+	    </div>
             <div class = "col-md-2"> <div class = "addButton" ng-click="add(listItem)">Add</div> </div>
             <div class = "col-md-2"></div> 
         </div>
@@ -451,6 +457,7 @@
                           <option value="does not exist">check if doesn't exist</option>
                           <option value="click">click on</option>
                           <option value="enter text">enter text in box</option>
+			  <option value="wait">wait</option>
                         </select>
                         </div>
 
@@ -469,7 +476,7 @@
                         </div>
                         <div ng-show = "snippetItem.action == 'navigate to url'">
                             <div class = "col-md-4 center"> 
-                                <input class = "input form-control" type="text" placeholder = "enter url" ng-model="snippetItem.url" />
+                                <input class = "input form-control" type="text" placeholder = "enter URL" ng-model="snippetItem.url" />
                             </div>
                         </div>
                         <div class = "col-md-2"> <div class = "addButton2" ng-click="addToSnippet(snippetItem)"> Add </div> </div>

@@ -59,10 +59,11 @@ cs194proj.controller('MainController', ['$scope', '$http', '$timeout', function(
 
     $scope.showAlert2 = false;
 
-   $scope.listItems = [{
+    $scope.listItems = [{
 	    action: '',
 	    selector: '',
-	    url: '',
+            url: '',
+            seconds: 0,
   	}];
 
     $scope.savedRowsArray = [
@@ -124,7 +125,6 @@ cs194proj.controller('MainController', ['$scope', '$http', '$timeout', function(
     $scope.showAlert = false;
 
     $scope.toggleAlert = function($timeout) {
-      console.log("YEA BISH");
       $scope.showAlert = true;
       
       setTimeout(function() {
@@ -171,12 +171,15 @@ cs194proj.controller('MainController', ['$scope', '$http', '$timeout', function(
           $scope.warningMessage = 'You must input a value for the URL!';
           console.log("here");
         }
-        else if (listItem.action != 'navigate to url' && (listItem.selector == '' || listItem.selector == undefined)) {
+        else if (listItem.action != 'navigate to url' && listItem.action != 'wait' && (listItem.selector == '' || listItem.selector == undefined)) {
           $scope.warningMessage = 'You must input a value for the selector!';
         }
         else if (listItem.action == 'enter text' && (listItem.text == '' || listItem.text == undefined)) {
           $scope.warningMessage = 'You must input a value for the text!';
         }
+	else if (listItem.action == 'wait' && (listItem.wait == '' || listItem.text == undefined)) {
+	  $scope.warningMessage = 'You must input a value for the time of your wait!';
+	}
         else {
           $scope.selectorList.push(angular.copy(listItem));
           $scope.warningMessage = '';
@@ -259,7 +262,6 @@ cs194proj.controller('MainController', ['$scope', '$http', '$timeout', function(
 
     $scope.nameSnippet = function() {
       if ($scope.model.currentSnippetName == '' || $scope.model.currentSnippetName == undefined) {
-        console.log("YEET THIS BITCH EMPTY");
         $scope.warningMessage2 = "you must give your snippet a name!";
       }
       else {

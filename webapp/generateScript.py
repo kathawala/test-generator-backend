@@ -37,7 +37,7 @@ class Browser:
             print ("ERROR: Action('clear') | Couldn't find element(s) specified by CSS selector: {x}".format(x=selector))
         for elem in elems:
             elem.clear()
-   def wait(self, seconds):
+    def wait(self, seconds):
         time.sleep(seconds)
 """
     return template
@@ -116,7 +116,7 @@ def processEvent(event):
 
     elif action == "wait":
 
-        return handleWait(event['seconds'])
+        return handleWait(float(event['seconds']))
         
     else:
 
