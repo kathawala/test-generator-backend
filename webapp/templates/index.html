@@ -404,6 +404,12 @@
 
             <!-- SNIPPET STUFF HERE -->
             <div ng-if="addSnippetViewable == true" class = "adding" >
+		{% if current_user.is_anonymous %}
+		<div class="row">
+		    <div class="col-md-3"></div>
+		    <div class="col-md-6" style="color: red; font-size: 19px; padding-top: 10px; padding-bottom: 10px;">You're not logged in, so your snippets won't be saved if you refresh this page.</div>
+		</div>
+		{% endif %}
                 <div class = "row color" style = "margin-bottom: 10px !important;">
 
                     <div ng-if = "snippetBeingNamed == true">

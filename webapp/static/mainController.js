@@ -37,9 +37,6 @@ cs194proj.controller('MainController', ['$scope', '$http', '$timeout', function(
     $scope.safariSelected = false;
 
     $scope.maximizeSelected = true;
-    // $scope.customSizeSelected = false;
-    // $scope.customWidth = 0;
-    // $scope.customHeight = 0;
     $scope.mobileSizeSelected = false;
     $scope.mobileWidth = 414;
     $scope.mobileHeight = 736;
@@ -66,58 +63,7 @@ cs194proj.controller('MainController', ['$scope', '$http', '$timeout', function(
             seconds: 0,
   	}];
 
-    $scope.savedRowsArray = [
-    {
-      name: "subset 1",
-      values: [{ action: 'navigate to url',
-        selector: '',
-        text: '',
-        url: 'www.google.com',
-      }, 
-      { action: 'click',
-        selector: 'example selector 1',
-        url: '',
-        text: '',
-      }]
-    },
-    {
-      name: "subset 2",
-      values: [{ action: 'click',
-        selector: 'this should give an error if chosen first',
-        url: '',
-        text: '',
-      }, 
-      { action: 'click',
-        selector: 'example selector 2',
-        url: '',
-        text: '',
-      }]
-    },
-    {
-      name: "subset 3",
-      values: [{ action: 'navigate to url',
-        selector: '',
-        text: '',
-        url: 'www.amazon.com',
-      }, 
-      { action: 'exists',
-        selector: 'example selector 3',
-        url: '',
-        text: '',
-      },
-      { action: 'enter text',
-        selector: 'example selector 4',
-        url: '',
-        text: 'test text',
-      },
-      { action: 'click',
-        selector: 'example selector 5',
-        url: '',
-        text: '',
-      }]
-    }];
-
-    console.log($scope.savedRowsArray);
+    $scope.savedRowsArray = [];
 
     $scope.generateMessage = 'generate script';
 
