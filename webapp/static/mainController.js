@@ -222,7 +222,7 @@ cs194proj.controller('MainController', ['$scope', '$http', '$timeout', function(
         $scope.tempSnippet.values = angular.copy($scope.snippetInProgress);
         $scope.savedRowsArray.push(angular.copy($scope.tempSnippet));
 
-	       $http.post('/snippets', JSON.stringify($scope.tempSnippet));
+	$http.post('/snippets', JSON.stringify($scope.tempSnippet));
 	
         // $scope.savedRowsArray.push(angular.copy($scope.tempSnippet));
         $scope.tempSnippet = {};
@@ -487,7 +487,15 @@ cs194proj.controller('MainController', ['$scope', '$http', '$timeout', function(
     }
 
     $scope.removeSnippet = function(index) {
-      $scope.savedRowsArray.splice(index, 1);
+      console.log(angular.toJson($scope.savedRowsArray[index]));
+      $http({
+	method: "POST",
+	url: '/remove_snippet',
+	data: angular.toJson($scope.savedRowsArray[index]),
+	headers: {'Content-Type': 'application/json'}
+      }).then(function(data) {
+	$scope.savedRowsArray.splice(index, 1);	
+      });
     }
 
     $scope.removeSnippetRow = function(index) {

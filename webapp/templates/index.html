@@ -198,7 +198,7 @@
         </div>
 
 	{% for message in get_flashed_messages() %}
-	<div id="flashed" class="alert bottomLeft2 animate-if" onClick="javascript:document.getElementById('flashed').setAttribute('style', 'display: none');">{{ message }}</div>
+	<div id="{{message[0]}}" class="alert bottomLeft2 animate-if" onClick="javascript:document.getElementById('{{message[0]}}').setAttribute('style', 'display: none');">{{ message }}</div>
 	{% endfor %}
 	
         <div class = "createPrompt"> Create a script! </div>

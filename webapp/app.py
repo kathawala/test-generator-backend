@@ -120,10 +120,14 @@ def register():
     username = request.form['username']
     password = request.form['password']
     confirmpassword = request.form['confirmpassword']
+    previously_named_user = db.session.query(User).filter_by(username=username).first()
+    if previously_named_user:
+        flash("Sorry, that username is taken. Pick another one!")
     if password == confirmpassword:
         user = User(username, password)
         db.session.add(user)
         db.session.commit()
+        login_user(user, remember=True)
     else:
         flash("Password didn't match confirmation")
     
@@ -169,6 +173,17 @@ def snippet_handling():
         db.session.commit()
     else:
         pass
+    return redirect('/')
+
+@app.route('/remove_snippet', methods=['POST'])
+@login_required
+def snippet_removal():
+    userid = current_user.id
+    data = request.get_json()
+    json_data = json.dumps(data)
+    snippet_to_remove = db.session.query(Snippet).filter_by(userid=userid, json_data=json_data).first()
+    db.session.delete(snippet_to_remove)
+    db.session.commit()
     return redirect('/')
         
 #####                        #####
