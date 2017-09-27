@@ -113,14 +113,16 @@ of execution of the generated program.
  
 ```
 
-#### 'enter text'
+#### `enter text`
 
-````Javascript
+```Javascript
 {
     "selector": "input.field_searchInput",
     "text": "omar khayaam",
     "action": "enter text"
 }
+
+```
 
 #### `exists`
 
